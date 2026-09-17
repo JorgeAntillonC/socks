@@ -1,0 +1,8 @@
+main:(){
+    pos:{ x u4 y u4 }
+    69  pos.x @4
+    420 pos.y @4
+
+    pos.x!4 dmp
+    pos.y!4 dmp
+}

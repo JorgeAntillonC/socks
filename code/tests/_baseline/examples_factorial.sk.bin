@@ -1,0 +1,9 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: examples\factorial.sk
+3628800
+the program has halted!!!
+
+---STDERR---

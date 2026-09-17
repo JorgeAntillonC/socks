@@ -1,0 +1,26 @@
+
+;;
+	a cast is written as:
+	(type)
+
+	it takes the value on top of the stack and reinterprets
+	it as the given type
+	the cast is only a change of interpretation, the bits are
+	left alone
+
+	casts are only available inside an ops block
+	the type may be any primitive
+
+	in an expression, a cast changes how the following
+	operations see the value
+	in a procedure body, a cast is used the same way, applied
+	to whatever value is on top at that point
+;;
+
+main:(){
+    0xFFFFFFFF bazz @4
+    bazz!4 (u4) dmp
+}
+
+bazz:[s4]
+foo:(u4:s4){ (s4) }

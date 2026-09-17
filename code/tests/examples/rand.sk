@@ -1,0 +1,31 @@
+rand_seed:[u8]
+
+Rand:(:u1){
+   rand_seed!8 
+   *> 17 >> ^
+   *> 19 << ^
+   *> 5 >> ^
+   *> rand_seed@8 255&(u1)
+}
+
+RandInit:(){
+    0x0123456789ABCDEF(u8) rand_seed @8
+}
+
+main:(){
+    randdist:{ 256 u8 }
+    RandInit#
+    0 while *> 256 < {
+        *> 3 << randdist+ 0(u8) >< @8
+        1+
+    } // 
+    
+    0 while *> 256000 < {
+        Rand# 3<< randdist+ *> !8 1+ >< @8 1+
+    } //
+
+    0 while *> 256 < {
+        *> 3 << randdist + !8 dmp
+        1+
+    } //
+}

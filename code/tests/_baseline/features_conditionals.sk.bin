@@ -1,0 +1,12 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: features\conditionals.sk
+20
+42
+4
+10
+the program has halted!!!
+
+---STDERR---

@@ -1,0 +1,11 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: features\scopes.sk
+69
+420
+420
+the program has halted!!!
+
+---STDERR---

@@ -1,0 +1,10 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: errors\error_externargs.sk
+[31mERROR[37m::the extern command needs exactly 2 arguments at C:\projects\socks\code\tests\errors\error_externargs.sk:1:11
+
+Trying to compile this garbage consumed electricity that could have powered a hospital.
+
+---STDERR---

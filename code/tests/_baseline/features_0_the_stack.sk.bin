@@ -1,0 +1,9 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: features\0_the_stack.sk
+3
+the program has halted!!!
+
+---STDERR---

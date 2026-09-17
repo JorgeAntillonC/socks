@@ -1,0 +1,6 @@
+; ERROR: missing block after while
+main:(){
+    0 while {
+        if  {
+            69 dmp
+        elif {

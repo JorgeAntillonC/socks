@@ -1,0 +1,208 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: examples\rule110.sk
+                                                                                                                                                                                             O
+                                                                                                                                                                                            OO
+                                                                                                                                                                                           OOO
+                                                                                                                                                                                          OO O
+                                                                                                                                                                                         OOOOO
+                                                                                                                                                                                        OO   O
+                                                                                                                                                                                       OOO  OO
+                                                                                                                                                                                      OO O OOO
+                                                                                                                                                                                     OOOOOOO O
+                                                                                                                                                                                    OO     OOO
+                                                                                                                                                                                   OOO    OO O
+                                                                                                                                                                                  OO O   OOOOO
+                                                                                                                                                                                 OOOOO  OO   O
+                                                                                                                                                                                OO   O OOO  OO
+                                                                                                                                                                               OOO  OOOO O OOO
+                                                                                                                                                                              OO O OO  OOOOO O
+                                                                                                                                                                             OOOOOOOO OO   OOO
+                                                                                                                                                                            OO      OOOO  OO O
+                                                                                                                                                                           OOO     OO  O OOOOO
+                                                                                                                                                                          OO O    OOO OOOO   O
+                                                                                                                                                                         OOOOO   OO OOO  O  OO
+                                                                                                                                                                        OO   O  OOOOO O OO OOO
+                                                                                                                                                                       OOO  OO OO   OOOOOOOO O
+                                                                                                                                                                      OO O OOOOOO  OO      OOO
+                                                                                                                                                                     OOOOOOO    O OOO     OO O
+                                                                                                                                                                    OO     O   OOOO O    OOOOO
+                                                                                                                                                                   OOO    OO  OO  OOO   OO   O
+                                                                                                                                                                  OO O   OOO OOO OO O  OOO  OO
+                                                                                                                                                                 OOOOO  OO OOO OOOOOO OO O OOO
+                                                                                                                                                                OO   O OOOOO OOO    OOOOOOOO O
+                                                                                                                                                               OOO  OOOO   OOO O   OO      OOO
+                                                                                                                                                              OO O OO  O  OO OOO  OOO     OO O
+                                                                                                                                                             OOOOOOOO OO OOOOO O OO O    OOOOO
+                                                                                                                                                            OO      OOOOOO   OOOOOOOO   OO   O
+                                                                                                                                                           OOO     OO    O  OO      O  OOO  OO
+                                                                                                                                                          OO O    OOO   OO OOO     OO OO O OOO
+                                                                                                                                                         OOOOO   OO O  OOOOO O    OOOOOOOOOO O
+                                                                                                                                                        OO   O  OOOOO OO   OOO   OO        OOO
+                                                                                                                                                       OOO  OO OO   OOOO  OO O  OOO       OO O
+                                                                                                                                                      OO O OOOOOO  OO  O OOOOO OO O      OOOOO
+                                                                                                                                                     OOOOOOO    O OOO OOOO   OOOOOO     OO   O
+                                                                                                                                                    OO     O   OOOO OOO  O  OO    O    OOO  OO
+                                                                                                                                                   OOO    OO  OO  OOO O OO OOO   OO   OO O OOO
+                                                                                                                                                  OO O   OOO OOO OO OOOOOOOO O  OOO  OOOOOOO O
+                                                                                                                                                 OOOOO  OO OOO OOOOOO      OOO OO O OO     OOO
+                                                                                                                                                OO   O OOOOO OOO    O     OO OOOOOOOOO    OO O
+                                                                                                                                               OOO  OOOO   OOO O   OO    OOOOO       O   OOOOO
+                                                                                                                                              OO O OO  O  OO OOO  OOO   OO   O      OO  OO   O
+                                                                                                                                             OOOOOOOO OO OOOOO O OO O  OOO  OO     OOO OOO  OO
+                                                                                                                                            OO      OOOOOO   OOOOOOOO OO O OOO    OO OOO O OOO
+                                                                                                                                           OOO     OO    O  OO      OOOOOOOO O   OOOOO OOOOO O
+                                                                                                                                          OO O    OOO   OO OOO     OO      OOO  OO   OOO   OOO
+                                                                                                                                         OOOOO   OO O  OOOOO O    OOO     OO O OOO  OO O  OO O
+                                                                                                                                        OO   O  OOOOO OO   OOO   OO O    OOOOOOO O OOOOO OOOOO
+                                                                                                                                       OOO  OO OO   OOOO  OO O  OOOOO   OO     OOOOO   OOO   O
+                                                                                                                                      OO O OOOOOO  OO  O OOOOO OO   O  OOO    OO   O  OO O  OO
+                                                                                                                                     OOOOOOO    O OOO OOOO   OOOO  OO OO O   OOO  OO OOOOO OOO
+                                                                                                                                    OO     O   OOOO OOO  O  OO  O OOOOOOOO  OO O OOOOO   OOO O
+                                                                                                                                   OOO    OO  OO  OOO O OO OOO OOOO      O OOOOOOO   O  OO OOO
+                                                                                                                                  OO O   OOO OOO OO OOOOOOOO OOO  O     OOOO     O  OO OOOOO O
+                                                                                                                                 OOOOO  OO OOO OOOOOO      OOO O OO    OO  O    OO OOOOO   OOO
+                                                                                                                                OO   O OOOOO OOO    O     OO OOOOOO   OOO OO   OOOOO   O  OO O
+                                                                                                                               OOO  OOOO   OOO O   OO    OOOOO    O  OO OOOO  OO   O  OO OOOOO
+                                                                                                                              OO O OO  O  OO OOO  OOO   OO   O   OO OOOOO  O OOO  OO OOOOO   O
+                                                                                                                             OOOOOOOO OO OOOOO O OO O  OOO  OO  OOOOO   O OOOO O OOOOO   O  OO
+                                                                                                                            OO      OOOOOO   OOOOOOOO OO O OOO OO   O  OOOO  OOOOO   O  OO OOO
+                                                                                                                           OOO     OO    O  OO      OOOOOOOO OOOO  OO OO  O OO   O  OO OOOOO O
+                                                                                                                          OO O    OOO   OO OOO     OO      OOO  O OOOOOO OOOOO  OO OOOOO   OOO
+                                                                                                                         OOOOO   OO O  OOOOO O    OOO     OO O OOOO    OOO   O OOOOO   O  OO O
+                                                                                                                        OO   O  OOOOO OO   OOO   OO O    OOOOOOO  O   OO O  OOOO   O  OO OOOOO
+                                                                                                                       OOO  OO OO   OOOO  OO O  OOOOO   OO     O OO  OOOOO OO  O  OO OOOOO   O
+                                                                                                                      OO O OOOOOO  OO  O OOOOO OO   O  OOO    OOOOO OO   OOOO OO OOOOO   O  OO
+                                                                                                                     OOOOOOO    O OOO OOOO   OOOO  OO OO O   OO   OOOO  OO  OOOOOO   O  OO OOO
+                                                                                                                    OO     O   OOOO OOO  O  OO  O OOOOOOOO  OOO  OO  O OOO OO    O  OO OOOOO O
+                                                                                                                   OOO    OO  OO  OOO O OO OOO OOOO      O OO O OOO OOOO OOOO   OO OOOOO   OOO
+                                                                                                                  OO O   OOO OOO OO OOOOOOOO OOO  O     OOOOOOOOO OOO  OOO  O  OOOOO   O  OO O
+                                                                                                                 OOOOO  OO OOO OOOOOO      OOO O OO    OO       OOO O OO O OO OO   O  OO OOOOO
+                                                                                                                OO   O OOOOO OOO    O     OO OOOOOO   OOO      OO OOOOOOOOOOOOOO  OO OOOOO   O
+                                                                                                               OOO  OOOO   OOO O   OO    OOOOO    O  OO O     OOOOO            O OOOOO   O  OO
+                                                                                                              OO O OO  O  OO OOO  OOO   OO   O   OO OOOOO    OO   O           OOOO   O  OO OOO
+                                                                                                             OOOOOOOO OO OOOOO O OO O  OOO  OO  OOOOO   O   OOO  OO          OO  O  OO OOOOO O
+                                                                                                            OO      OOOOOO   OOOOOOOO OO O OOO OO   O  OO  OO O OOO         OOO OO OOOOO   OOO
+                                                                                                           OOO     OO    O  OO      OOOOOOOO OOOO  OO OOO OOOOOOO O        OO OOOOOO   O  OO O
+                                                                                                          OO O    OOO   OO OOO     OO      OOO  O OOOOO OOO     OOO       OOOOO    O  OO OOOOO
+                                                                                                         OOOOO   OO O  OOOOO O    OOO     OO O OOOO   OOO O    OO O      OO   O   OO OOOOO   O
+                                                                                                        OO   O  OOOOO OO   OOO   OO O    OOOOOOO  O  OO OOO   OOOOO     OOO  OO  OOOOO   O  OO
+                                                                                                       OOO  OO OO   OOOO  OO O  OOOOO   OO     O OO OOOOO O  OO   O    OO O OOO OO   O  OO OOO
+                                                                                                      OO O OOOOOO  OO  O OOOOO OO   O  OOO    OOOOOOO   OOO OOO  OO   OOOOOOO OOOO  OO OOOOO O
+                                                                                                     OOOOOOO    O OOO OOOO   OOOO  OO OO O   OO     O  OO OOO O OOO  OO     OOO  O OOOOO   OOO
+                                                                                                    OO     O   OOOO OOO  O  OO  O OOOOOOOO  OOO    OO OOOOO OOOOO O OOO    OO O OOOO   O  OO O
+                                                                                                   OOO    OO  OO  OOO O OO OOO OOOO      O OO O   OOOOO   OOO   OOOOO O   OOOOOOO  O  OO OOOOO
+                                                                                                  OO O   OOO OOO OO OOOOOOOO OOO  O     OOOOOOO  OO   O  OO O  OO   OOO  OO     O OO OOOOO   O
+                                                                                                 OOOOO  OO OOO OOOOOO      OOO O OO    OO     O OOO  OO OOOOO OOO  OO O OOO    OOOOOOO   O  OO
+                                                                                                OO   O OOOOO OOO    O     OO OOOOOO   OOO    OOOO O OOOOO   OOO O OOOOOOO O   OO     O  OO OOO
+                                                                                               OOO  OOOO   OOO O   OO    OOOOO    O  OO O   OO  OOOOO   O  OO OOOOO     OOO  OOO    OO OOOOO O
+                                                                                              OO O OO  O  OO OOO  OOO   OO   O   OO OOOOO  OOO OO   O  OO OOOOO   O    OO O OO O   OOOOO   OOO
+                                                                                             OOOOOOOO OO OOOOO O OO O  OOO  OO  OOOOO   O OO OOOO  OO OOOOO   O  OO   OOOOOOOOOO  OO   O  OO O
+                                                                                            OO      OOOOOO   OOOOOOOO OO O OOO OO   O  OOOOOOO  O OOOOO   O  OO OOO  OO        O OOO  OO OOOOO
+                                                                                           OOO     OO    O  OO      OOOOOOOO OOOO  OO OO     O OOOO   O  OO OOOOO O OOO       OOOO O OOOOO   O
+                                                                                          OO O    OOO   OO OOO     OO      OOO  O OOOOOO    OOOO  O  OO OOOOO   OOOOO O      OO  OOOOO   O  OO
+                                                                                         OOOOO   OO O  OOOOO O    OOO     OO O OOOO    O   OO  O OO OOOOO   O  OO   OOO     OOO OO   O  OO OOO
+                                                                                        OO   O  OOOOO OO   OOO   OO O    OOOOOOO  O   OO  OOO OOOOOOO   O  OO OOO  OO O    OO OOOO  OO OOOOO O
+                                                                                       OOO  OO OO   OOOO  OO O  OOOOO   OO     O OO  OOO OO OOO     O  OO OOOOO O OOOOO   OOOOO  O OOOOO   OOO
+                                                                                      OO O OOOOOO  OO  O OOOOO OO   O  OOO    OOOOO OO OOOOOO O    OO OOOOO   OOOOO   O  OO   O OOOO   O  OO O
+                                                                                     OOOOOOO    O OOO OOOO   OOOO  OO OO O   OO   OOOOOO    OOO   OOOOO   O  OO   O  OO OOO  OOOO  O  OO OOOOO
+                                                                                    OO     O   OOOO OOO  O  OO  O OOOOOOOO  OOO  OO    O   OO O  OO   O  OO OOO  OO OOOOO O OO  O OO OOOOO   O
+                                                                                   OOO    OO  OO  OOO O OO OOO OOOO      O OO O OOO   OO  OOOOO OOO  OO OOOOO O OOOOO   OOOOOO OOOOOOO   O  OO
+                                                                                  OO O   OOO OOO OO OOOOOOOO OOO  O     OOOOOOOOO O  OOO OO   OOO O OOOOO   OOOOO   O  OO    OOO     O  OO OOO
+                                                                                 OOOOO  OO OOO OOOOOO      OOO O OO    OO       OOO OO OOOO  OO OOOOO   O  OO   O  OO OOO   OO O    OO OOOOO O
+                                                                                OO   O OOOOO OOO    O     OO OOOOOO   OOO      OO OOOOOO  O OOOOO   O  OO OOO  OO OOOOO O  OOOOO   OOOOO   OOO
+                                                                               OOO  OOOO   OOO O   OO    OOOOO    O  OO O     OOOOO    O OOOO   O  OO OOOOO O OOOOO   OOO OO   O  OO   O  OO O
+                                                                              OO O OO  O  OO OOO  OOO   OO   O   OO OOOOO    OO   O   OOOO  O  OO OOOOO   OOOOO   O  OO OOOO  OO OOO  OO OOOOO
+                                                                             OOOOOOOO OO OOOOO O OO O  OOO  OO  OOOOO   O   OOO  OO  OO  O OO OOOOO   O  OO   O  OO OOOOO  O OOOOO O OOOOO   O
+                                                                            OO      OOOOOO   OOOOOOOO OO O OOO OO   O  OO  OO O OOO OOO OOOOOOO   O  OO OOO  OO OOOOO   O OOOO   OOOOO   O  OO
+                                                                           OOO     OO    O  OO      OOOOOOOO OOOO  OO OOO OOOOOOO OOO OOO     O  OO OOOOO O OOOOO   O  OOOO  O  OO   O  OO OOO
+                                                                          OO O    OOO   OO OOO     OO      OOO  O OOOOO OOO     OOO OOO O    OO OOOOO   OOOOO   O  OO OO  O OO OOO  OO OOOOO O
+                                                                         OOOOO   OO O  OOOOO O    OOO     OO O OOOO   OOO O    OO OOO OOO   OOOOO   O  OO   O  OO OOOOOO OOOOOOO O OOOOO   OOO
+                                                                        OO   O  OOOOO OO   OOO   OO O    OOOOOOO  O  OO OOO   OOOOO OOO O  OO   O  OO OOO  OO OOOOO    OOO     OOOOO   O  OO O
+                                                                       OOO  OO OO   OOOO  OO O  OOOOO   OO     O OO OOOOO O  OO   OOO OOO OOO  OO OOOOO O OOOOO   O   OO O    OO   O  OO OOOOO
+                                                                      OO O OOOOOO  OO  O OOOOO OO   O  OOO    OOOOOOO   OOO OOO  OO OOO OOO O OOOOO   OOOOO   O  OO  OOOOO   OOO  OO OOOOO   O
+                                                                     OOOOOOO    O OOO OOOO   OOOO  OO OO O   OO     O  OO OOO O OOOOO OOO OOOOO   O  OO   O  OO OOO OO   O  OO O OOOOO   O  OO
+                                                                    OO     O   OOOO OOO  O  OO  O OOOOOOOO  OOO    OO OOOOO OOOOO   OOO OOO   O  OO OOO  OO OOOOO OOOO  OO OOOOOOO   O  OO OOO
+                                                                   OOO    OO  OO  OOO O OO OOO OOOO      O OO O   OOOOO   OOO   O  OO OOO O  OO OOOOO O OOOOO   OOO  O OOOOO     O  OO OOOOO O
+                                                                  OO O   OOO OOO OO OOOOOOOO OOO  O     OOOOOOO  OO   O  OO O  OO OOOOO OOO OOOOO   OOOOO   O  OO O OOOO   O    OO OOOOO   OOO
+                                                                 OOOOO  OO OOO OOOOOO      OOO O OO    OO     O OOO  OO OOOOO OOOOO   OOO OOO   O  OO   O  OO OOOOOOO  O  OO   OOOOO   O  OO O
+                                                                OO   O OOOOO OOO    O     OO OOOOOO   OOO    OOOO O OOOOO   OOO   O  OO OOO O  OO OOO  OO OOOOO     O OO OOO  OO   O  OO OOOOO
+                                                               OOO  OOOO   OOO O   OO    OOOOO    O  OO O   OO  OOOOO   O  OO O  OO OOOOO OOO OOOOO O OOOOO   O    OOOOOOO O OOO  OO OOOOO   O
+                                                              OO O OO  O  OO OOO  OOO   OO   O   OO OOOOO  OOO OO   O  OO OOOOO OOOOO   OOO OOO   OOOOO   O  OO   OO     OOOOO O OOOOO   O  OO
+                                                             OOOOOOOO OO OOOOO O OO O  OOO  OO  OOOOO   O OO OOOO  OO OOOOO   OOO   O  OO OOO O  OO   O  OO OOO  OOO    OO   OOOOO   O  OO OOO
+                                                            OO      OOOOOO   OOOOOOOO OO O OOO OO   O  OOOOOOO  O OOOOO   O  OO O  OO OOOOO OOO OOO  OO OOOOO O OO O   OOO  OO   O  OO OOOOO O
+                                                           OOO     OO    O  OO      OOOOOOOO OOOO  OO OO     O OOOO   O  OO OOOOO OOOOO   OOO OOO O OOOOO   OOOOOOOO  OO O OOO  OO OOOOO   OOO
+                                                          OO O    OOO   OO OOO     OO      OOO  O OOOOOO    OOOO  O  OO OOOOO   OOO   O  OO OOO OOOOO   O  OO      O OOOOOOO O OOOOO   O  OO O
+                                                         OOOOO   OO O  OOOOO O    OOO     OO O OOOO    O   OO  O OO OOOOO   O  OO O  OO OOOOO OOO   O  OO OOO     OOOO     OOOOO   O  OO OOOOO
+                                                        OO   O  OOOOO OO   OOO   OO O    OOOOOOO  O   OO  OOO OOOOOOO   O  OO OOOOO OOOOO   OOO O  OO OOOOO O    OO  O    OO   O  OO OOOOO   O
+                                                       OOO  OO OO   OOOO  OO O  OOOOO   OO     O OO  OOO OO OOO     O  OO OOOOO   OOO   O  OO OOO OOOOO   OOO   OOO OO   OOO  OO OOOOO   O  OO
+                                                      OO O OOOOOO  OO  O OOOOO OO   O  OOO    OOOOO OO OOOOOO O    OO OOOOO   O  OO O  OO OOOOO OOO   O  OO O  OO OOOO  OO O OOOOO   O  OO OOO
+                                                     OOOOOOO    O OOO OOOO   OOOO  OO OO O   OO   OOOOOO    OOO   OOOOO   O  OO OOOOO OOOOO   OOO O  OO OOOOO OOOOO  O OOOOOOO   O  OO OOOOO O
+                                                    OO     O   OOOO OOO  O  OO  O OOOOOOOO  OOO  OO    O   OO O  OO   O  OO OOOOO   OOO   O  OO OOO OOOOO   OOO   O OOOO     O  OO OOOOO   OOO
+                                                   OOO    OO  OO  OOO O OO OOO OOOO      O OO O OOO   OO  OOOOO OOO  OO OOOOO   O  OO O  OO OOOOO OOO   O  OO O  OOOO  O    OO OOOOO   O  OO O
+                                                  OO O   OOO OOO OO OOOOOOOO OOO  O     OOOOOOOOO O  OOO OO   OOO O OOOOO   O  OO OOOOO OOOOO   OOO O  OO OOOOO OO  O OO   OOOOO   O  OO OOOOO
+                                                 OOOOO  OO OOO OOOOOO      OOO O OO    OO       OOO OO OOOO  OO OOOOO   O  OO OOOOO   OOO   O  OO OOO OOOOO   OOOO OOOOO  OO   O  OO OOOOO   O
+                                                OO   O OOOOO OOO    O     OO OOOOOO   OOO      OO OOOOOO  O OOOOO   O  OO OOOOO   O  OO O  OO OOOOO OOO   O  OO  OOO   O OOO  OO OOOOO   O  OO
+                                               OOO  OOOO   OOO O   OO    OOOOO    O  OO O     OOOOO    O OOOO   O  OO OOOOO   O  OO OOOOO OOOOO   OOO O  OO OOO OO O  OOOO O OOOOO   O  OO OOO
+                                              OO O OO  O  OO OOO  OOO   OO   O   OO OOOOO    OO   O   OOOO  O  OO OOOOO   O  OO OOOOO   OOO   O  OO OOO OOOOO OOOOOO OO  OOOOO   O  OO OOOOO O
+                                             OOOOOOOO OO OOOOO O OO O  OOO  OO  OOOOO   O   OOO  OO  OO  O OO OOOOO   O  OO OOOOO   O  OO O  OO OOOOO OOO   OOO    OOOO OO   O  OO OOOOO   OOO
+                                            OO      OOOOOO   OOOOOOOO OO O OOO OO   O  OO  OO O OOO OOO OOOOOOO   O  OO OOOOO   O  OO OOOOO OOOOO   OOO O  OO O   OO  OOOO  OO OOOOO   O  OO O
+                                           OOO     OO    O  OO      OOOOOOOO OOOO  OO OOO OOOOOOO OOO OOO     O  OO OOOOO   O  OO OOOOO   OOO   O  OO OOO OOOOO  OOO OO  O OOOOO   O  OO OOOOO
+                                          OO O    OOO   OO OOO     OO      OOO  O OOOOO OOO     OOO OOO O    OO OOOOO   O  OO OOOOO   O  OO O  OO OOOOO OOO   O OO OOOO OOOO   O  OO OOOOO   O
+                                         OOOOO   OO O  OOOOO O    OOO     OO O OOOO   OOO O    OO OOO OOO   OOOOO   O  OO OOOOO   O  OO OOOOO OOOOO   OOO O  OOOOOOO  OOO  O  OO OOOOO   O  OO
+                                        OO   O  OOOOO OO   OOO   OO O    OOOOOOO  O  OO OOO   OOOOO OOO O  OO   O  OO OOOOO   O  OO OOOOO   OOO   O  OO OOO OO     O OO O OO OOOOO   O  OO OOO
+                                       OOO  OO OO   OOOO  OO O  OOOOO   OO     O OO OOOOO O  OO   OOO OOO OOO  OO OOOOO   O  OO OOOOO   O  OO O  OO OOOOO OOOO    OOOOOOOOOOOO   O  OO OOOOO O
+                                      OO O OOOOOO  OO  O OOOOO OO   O  OOO    OOOOOOO   OOO OOO  OO OOO OOO O OOOOO   O  OO OOOOO   O  OO OOOOO OOOOO   OOO  O   OO          O  OO OOOOO   OOO
+                                     OOOOOOO    O OOO OOOO   OOOO  OO OO O   OO     O  OO OOO O OOOOO OOO OOOOO   O  OO OOOOO   O  OO OOOOO   OOO   O  OO O OO  OOO         OO OOOOO   O  OO O
+                                    OO     O   OOOO OOO  O  OO  O OOOOOOOO  OOO    OO OOOOO OOOOO   OOO OOO   O  OO OOOOO   O  OO OOOOO   O  OO O  OO OOOOOOOO OO O        OOOOO   O  OO OOOOO
+                                   OOO    OO  OO  OOO O OO OOO OOOO      O OO O   OOOOO   OOO   O  OO OOO O  OO OOOOO   O  OO OOOOO   O  OO OOOOO OOOOO      OOOOOO       OO   O  OO OOOOO   O
+                                  OO O   OOO OOO OO OOOOOOOO OOO  O     OOOOOOO  OO   O  OO O  OO OOOOO OOO OOOOO   O  OO OOOOO   O  OO OOOOO   OOO   O     OO    O      OOO  OO OOOOO   O  OO
+                                 OOOOO  OO OOO OOOOOO      OOO O OO    OO     O OOO  OO OOOOO OOOOO   OOO OOO   O  OO OOOOO   O  OO OOOOO   O  OO O  OO    OOO   OO     OO O OOOOO   O  OO OOO
+                                OO   O OOOOO OOO    O     OO OOOOOO   OOO    OOOO O OOOOO   OOO   O  OO OOO O  OO OOOOO   O  OO OOOOO   O  OO OOOOO OOO   OO O  OOO    OOOOOOO   O  OO OOOOO O
+                               OOO  OOOO   OOO O   OO    OOOOO    O  OO O   OO  OOOOO   O  OO O  OO OOOOO OOO OOOOO   O  OO OOOOO   O  OO OOOOO   OOO O  OOOOO OO O   OO     O  OO OOOOO   OOO
+                              OO O OO  O  OO OOO  OOO   OO   O   OO OOOOO  OOO OO   O  OO OOOOO OOOOO   OOO OOO   O  OO OOOOO   O  OO OOOOO   O  OO OOO OO   OOOOOO  OOO    OO OOOOO   O  OO O
+                             OOOOOOOO OO OOOOO O OO O  OOO  OO  OOOOO   O OO OOOO  OO OOOOO   OOO   O  OO OOO O  OO OOOOO   O  OO OOOOO   O  OO OOOOO OOOO  OO    O OO O   OOOOO   O  OO OOOOO
+                            OO      OOOOOO   OOOOOOOO OO O OOO OO   O  OOOOOOO  O OOOOO   O  OO O  OO OOOOO OOO OOOOO   O  OO OOOOO   O  OO OOOOO   OOO  O OOO   OOOOOOO  OO   O  OO OOOOO   O
+                           OOO     OO    O  OO      OOOOOOOO OOOO  OO OO     O OOOO   O  OO OOOOO OOOOO   OOO OOO   O  OO OOOOO   O  OO OOOOO   O  OO O OOOO O  OO     O OOO  OO OOOOO   O  OO
+                          OO O    OOO   OO OOO     OO      OOO  O OOOOOO    OOOO  O  OO OOOOO   OOO   O  OO OOO O  OO OOOOO   O  OO OOOOO   O  OO OOOOOOO  OOO OOO    OOOO O OOOOO   O  OO OOO
+                         OOOOO   OO O  OOOOO O    OOO     OO O OOOO    O   OO  O OO OOOOO   O  OO O  OO OOOOO OOO OOOOO   O  OO OOOOO   O  OO OOOOO     O OO OOO O   OO  OOOOO   O  OO OOOOO O
+                        OO   O  OOOOO OO   OOO   OO O    OOOOOOO  O   OO  OOO OOOOOOO   O  OO OOOOO OOOOO   OOO OOO   O  OO OOOOO   O  OO OOOOO   O    OOOOOOO OOO  OOO OO   O  OO OOOOO   OOO
+                       OOO  OO OO   OOOO  OO O  OOOOO   OO     O OO  OOO OO OOO     O  OO OOOOO   OOO   O  OO OOO O  OO OOOOO   O  OO OOOOO   O  OO   OO     OOO O OO OOOO  OO OOOOO   O  OO O
+                      OO O OOOOOO  OO  O OOOOO OO   O  OOO    OOOOO OO OOOOOO O    OO OOOOO   O  OO O  OO OOOOO OOO OOOOO   O  OO OOOOO   O  OO OOO  OOO    OO OOOOOOOO  O OOOOO   O  OO OOOOO
+                     OOOOOOO    O OOO OOOO   OOOO  OO OO O   OO   OOOOOO    OOO   OOOOO   O  OO OOOOO OOOOO   OOO OOO   O  OO OOOOO   O  OO OOOOO O OO O   OOOOO      O OOOO   O  OO OOOOO   O
+                    OO     O   OOOO OOO  O  OO  O OOOOOOOO  OOO  OO    O   OO O  OO   O  OO OOOOO   OOO   O  OO OOO O  OO OOOOO   O  OO OOOOO   OOOOOOOO  OO   O     OOOO  O  OO OOOOO   O  OO
+                   OOO    OO  OO  OOO O OO OOO OOOO      O OO O OOO   OO  OOOOO OOO  OO OOOOO   O  OO O  OO OOOOO OOO OOOOO   O  OO OOOOO   O  OO      O OOO  OO    OO  O OO OOOOO   O  OO OOO
+                  OO O   OOO OOO OO OOOOOOOO OOO  O     OOOOOOOOO O  OOO OO   OOO O OOOOO   O  OO OOOOO OOOOO   OOO OOO   O  OO OOOOO   O  OO OOO     OOOO O OOO   OOO OOOOOOO   O  OO OOOOO O
+                 OOOOO  OO OOO OOOOOO      OOO O OO    OO       OOO OO OOOO  OO OOOOO   O  OO OOOOO   OOO   O  OO OOO O  OO OOOOO   O  OO OOOOO O    OO  OOOOO O  OO OOO     O  OO OOOOO   OOO
+                OO   O OOOOO OOO    O     OO OOOOOO   OOO      OO OOOOOO  O OOOOO   O  OO OOOOO   O  OO O  OO OOOOO OOO OOOOO   O  OO OOOOO   OOO   OOO OO   OOO OOOOO O    OO OOOOO   O  OO O
+               OOO  OOOO   OOO O   OO    OOOOO    O  OO O     OOOOO    O OOOO   O  OO OOOOO   O  OO OOOOO OOOOO   OOO OOO   O  OO OOOOO   O  OO O  OO OOOO  OO OOO   OOO   OOOOO   O  OO OOOOO
+              OO O OO  O  OO OOO  OOO   OO   O   OO OOOOO    OO   O   OOOO  O  OO OOOOO   O  OO OOOOO   OOO   O  OO OOO O  OO OOOOO   O  OO OOOOO OOOOO  O OOOOO O  OO O  OO   O  OO OOOOO   O
+             OOOOOOOO OO OOOOO O OO O  OOO  OO  OOOOO   O   OOO  OO  OO  O OO OOOOO   O  OO OOOOO   O  OO O  OO OOOOO OOO OOOOO   O  OO OOOOO   OOO   O OOOO   OOO OOOOO OOO  OO OOOOO   O  OO
+            OO      OOOOOO   OOOOOOOO OO O OOO OO   O  OO  OO O OOO OOO OOOOOOO   O  OO OOOOO   O  OO OOOOO OOOOO   OOO OOO   O  OO OOOOO   O  OO O  OOOO  O  OO OOO   OOO O OOOOO   O  OO OOO
+           OOO     OO    O  OO      OOOOOOOO OOOO  OO OOO OOOOOOO OOO OOO     O  OO OOOOO   O  OO OOOOO   OOO   O  OO OOO O  OO OOOOO   O  OO OOOOO OO  O OO OOOOO O  OO OOOOO   O  OO OOOOO O
+          OO O    OOO   OO OOO     OO      OOO  O OOOOO OOO     OOO OOO O    OO OOOOO   O  OO OOOOO   O  OO O  OO OOOOO OOO OOOOO   O  OO OOOOO   OOOO OOOOOOO   OOO OOOOO   O  OO OOOOO   OOO
+         OOOOO   OO O  OOOOO O    OOO     OO O OOOO   OOO O    OO OOO OOO   OOOOO   O  OO OOOOO   O  OO OOOOO OOOOO   OOO OOO   O  OO OOOOO   O  OO  OOO     O  OO OOO   O  OO OOOOO   O  OO O
+        OO   O  OOOOO OO   OOO   OO O    OOOOOOO  O  OO OOO   OOOOO OOO O  OO   O  OO OOOOO   O  OO OOOOO   OOO   O  OO OOO O  OO OOOOO   O  OO OOO OO O    OO OOOOO O  OO OOOOO   O  OO OOOOO
+       OOO  OO OO   OOOO  OO O  OOOOO   OO     O OO OOOOO O  OO   OOO OOO OOO  OO OOOOO   O  OO OOOOO   O  OO O  OO OOOOO OOO OOOOO   O  OO OOOOO OOOOOO   OOOOO   OOO OOOOO   O  OO OOOOO   O
+      OO O OOOOOO  OO  O OOOOO OO   O  OOO    OOOOOOO   OOO OOO  OO OOO OOO O OOOOO   O  OO OOOOO   O  OO OOOOO OOOOO   OOO OOO   O  OO OOOOO   OOO    O  OO   O  OO OOO   O  OO OOOOO   O  OO
+     OOOOOOO    O OOO OOOO   OOOO  OO OO O   OO     O  OO OOO O OOOOO OOO OOOOO   O  OO OOOOO   O  OO OOOOO   OOO   O  OO OOO O  OO OOOOO   O  OO O   OO OOO  OO OOOOO O  OO OOOOO   O  OO OOO
+    OO     O   OOOO OOO  O  OO  O OOOOOOOO  OOO    OO OOOOO OOOOO   OOO OOO   O  OO OOOOO   O  OO OOOOO   O  OO O  OO OOOOO OOO OOOOO   O  OO OOOOO  OOOOO O OOOOO   OOO OOOOO   O  OO OOOOO O
+   OOO    OO  OO  OOO O OO OOO OOOO      O OO O   OOOOO   OOO   O  OO OOO O  OO OOOOO   O  OO OOOOO   O  OO OOOOO OOOOO   OOO OOO   O  OO OOOOO   O OO   OOOOO   O  OO OOO   O  OO OOOOO   OOO
+  OO O   OOO OOO OO OOOOOOOO OOO  O     OOOOOOO  OO   O  OO O  OO OOOOO OOO OOOOO   O  OO OOOOO   O  OO OOOOO   OOO   O  OO OOO O  OO OOOOO   O  OOOOO  OO   O  OO OOOOO O  OO OOOOO   O  OO O
+ OOOOO  OO OOO OOOOOO      OOO O OO    OO     O OOO  OO OOOOO OOOOO   OOO OOO   O  OO OOOOO   O  OO OOOOO   O  OO O  OO OOOOO OOO OOOOO   O  OO OO   O OOO  OO OOOOO   OOO OOOOO   O  OO OOOOO
+OO   O OOOOO OOO    O     OO OOOOOO   OOO    OOOO O OOOOO   OOO   O  OO OOO O  OO OOOOO   O  OO OOOOO   O  OO OOOOO OOOOO   OOO OOO   O  OO OOOOOO  OOOO O OOOOO   O  OO OOO   O  OO OOOOO   O
+OO  OOOO   OOO O   OO    OOOOO    O  OO O   OO  OOOOO   O  OO O  OO OOOOO OOO OOOOO   O  OO OOOOO   O  OO OOOOO   OOO   O  OO OOO O  OO OOOOO    O OO  OOOOO   O  OO OOOOO O  OO OOOOO   O  OO
+OO OO  O  OO OOO  OOO   OO   O   OO OOOOO  OOO OO   O  OO OOOOO OOOOO   OOO OOO   O  OO OOOOO   O  OO OOOOO   O  OO O  OO OOOOO OOO OOOOO   O   OOOOO OO   O  OO OOOOO   OOO OOOOO   O  OO OOO
+OOOOO OO OOOOO O OO O  OOO  OO  OOOOO   O OO OOOO  OO OOOOO   OOO   O  OO OOO O  OO OOOOO   O  OO OOOOO   O  OO OOOOO OOOOO   OOO OOO   O  OO  OO   OOOO  OO OOOOO   O  OO OOO   O  OO OOOOO O
+O   OOOOOO   OOOOOOOO OO O OOO OO   O  OOOOOOO  O OOOOO   O  OO O  OO OOOOO OOO OOOOO   O  OO OOOOO   O  OO OOOOO   OOO   O  OO OOO O  OO OOO OOO  OO  O OOOOO   O  OO OOOOO O  OO OOOOO   OOO
+O  OO    O  OO      OOOOOOOO OOOO  OO OO     O OOOO   O  OO OOOOO OOOOO   OOO OOO   O  OO OOOOO   O  OO OOOOO   O  OO O  OO OOOOO OOO OOOOO OOO O OOO OOOO   O  OO OOOOO   OOO OOOOO   O  OO O
+O OOO   OO OOO     OO      OOO  O OOOOOO    OOOO  O  OO OOOOO   OOO   O  OO OOO O  OO OOOOO   O  OO OOOOO   O  OO OOOOO OOOOO   OOO OOO   OOO OOOOO OOO  O  OO OOOOO   O  OO OOO   O  OO OOOOO
+OOO O  OOOOO O    OOO     OO O OOOO    O   OO  O OO OOOOO   O  OO O  OO OOOOO OOO OOOOO   O  OO OOOOO   O  OO OOOOO   OOO   O  OO OOO O  OO OOO   OOO O OO OOOOO   O  OO OOOOO O  OO OOOOO   O
+O OOO OO   OOO   OO O    OOOOOOO  O   OO  OOO OOOOOOO   O  OO OOOOO OOOOO   OOO OOO   O  OO OOOOO   O  OO OOOOO   O  OO O  OO OOOOO OOO OOOOO O  OO OOOOOOOO   O  OO OOOOO   OOO OOOOO   O  OO
+OOO OOOO  OO O  OOOOO   OO     O OO  OOO OO OOO     O  OO OOOOO   OOO   O  OO OOO O  OO OOOOO   O  OO OOOOO   O  OO OOOOO OOOOO   OOO OOO   OOO OOOOO      O  OO OOOOO   O  OO OOO   O  OO OOO
+O OOO  O OOOOO OO   O  OOO    OOOOO OO OOOOOO O    OO OOOOO   O  OO O  OO OOOOO OOO OOOOO   O  OO OOOOO   O  OO OOOOO   OOO   O  OO OOO O  OO OOO   O     OO OOOOO   O  OO OOOOO O  OO OOOOO O
+the program has halted!!!
+
+---STDERR---

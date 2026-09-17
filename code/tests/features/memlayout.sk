@@ -1,0 +1,29 @@
+;;
+	a dynamic memory layout is declared inside a scope as:
+	sym : { members }
+
+	the layout reserves memory on the stack for the
+	enclosing scope, released when that scope ends
+	the name refers to the base address of the layout
+
+	a member is written as:
+	num sym type
+	num is the number of elements, defaults to 1 if not given
+	sym is the name of the field, optional
+	type is a primitive type (u1, u4, ptr, ...)
+	the total size of the layout is the sum of the
+	member sizes, each aligned to its type
+;;
+main:(){
+	10 while *> {
+		*> *> 1- arr+ @ ; n (n ((n 1 -) arr +) .) 
+		1- ; (n 1 -)
+	}
+	//
+	0 while *> 10 < {
+		*> arr+ ! dmp
+		1+
+	}
+	//
+	arr:{ 10 u1 }
+}

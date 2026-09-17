@@ -1,0 +1,33 @@
+;;
+	each procedure body and each if/while body opens
+	a new scope
+
+	procedures may be defined inside any scope
+
+	a name refers to the closest definition made
+	above the point where the name is used, searching
+	from the innermost scope outward
+
+	when a scope closes, the names it defined are no
+	longer visible
+;;
+
+foo:(:s4){
+    35
+    foo#
+    foo:(s4:s4){ }
+    34+
+}
+
+main:(){
+    foo# dmp
+    if 1 {
+        foo#
+        bar:(:s4){ 400 }
+        20 + dmp
+        foo:(:s4){ bar# }
+    }
+    bar#
+}
+
+bar:(){ 420 dmp }

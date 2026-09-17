@@ -1,0 +1,10 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: errors\error_noentrypoint.sk
+[31mERROR[37m::entry point { main } was not found at C:\projects\socks\code\tests\errors\error_noentrypoint.sk
+
+Trying to compile this garbage consumed electricity that could have powered a hospital.
+
+---STDERR---

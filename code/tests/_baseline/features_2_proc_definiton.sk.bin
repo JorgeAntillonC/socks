@@ -1,0 +1,9 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: features\2_proc_definiton.sk
+69
+the program has halted!!!
+
+---STDERR---

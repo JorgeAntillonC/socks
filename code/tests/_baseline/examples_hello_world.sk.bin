@@ -1,0 +1,9 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: examples\hello_world.sk
+hello world!!!!
+the program has halted!!!
+
+---STDERR---

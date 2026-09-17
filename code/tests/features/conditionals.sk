@@ -1,0 +1,35 @@
+
+;;
+	a branch construct is written as:
+	if ops0 { ops1 }
+	(elif ops0 { ops1 })*
+	(else { ops1 })?
+
+	ops0 must produce an extra element on the stack
+	depending on whether it is non-zero or zero the
+	following body is executed or skipped
+
+	if may be followed by any number of elif branches,
+	each with its own condition, evaluated in order until
+	one succeeds
+	else is optional and runs when no condition succeeded
+
+	when else is absent, every branch body must leave
+	the stack exactly as it was before the branch, since
+	control may skip all of them
+
+	when else is present, the branch bodies are free to
+	change the stack, but every branch must leave it in
+	the same shape, so the code after the branch sees a
+	consistent result regardless of which path ran
+
+	branches may be nested
+;;
+
+main:(){
+    10 20 if 1 { >< } // dmp ; 10
+    if 0 { 35 34+ }	elif 1 { foo# } else { 430 10- } dmp ; 420
+    if 1 { 1 if 0 { 2 } else { 3 } } else { 4 5  } + dmp ; 4
+    0 while *> 10 < { 1+ if 1 { 2+ 2- } } dmp ; 10
+}
+foo:(:s4){ 42 }

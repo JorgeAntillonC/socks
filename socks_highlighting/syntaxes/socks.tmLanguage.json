@@ -1,0 +1,73 @@
+{
+    "scopeName": "source.sk",
+    "patterns": [
+        {
+            "name": "comment_block.sk",
+            "begin": ";;",
+            "end": ";;"
+        },
+        {
+            "name": "comment_line.sk",
+            "match": ";(?!;).*?$"
+        },
+        {
+            "name": "keyword.sk",
+            "match": "\\b(extrn|if|elif|else|while|null|dmp|oogabuga)\\b"
+        },
+        {
+            "name": "types.sk",
+            "match": "\\b(u1|u2|u4|u8|s1|s2|s4|s8|ptr)\\b"
+        },
+        {
+            "name": "proc_def.sk",
+            "match": "\\b[A-Za-z_][A-Za-z0-9_]*(?=\\s*:\\s*\\()"
+        },
+        {
+            "name": "dmemlay_def.sk",
+            "match": "\\b[A-Za-z_][A-Za-z0-9_]*(?=\\s*:\\s*\\{)"
+        },
+        {
+            "name": "smemlay_def.sk",
+            "match": "\\b[A-Za-z_][A-Za-z0-9_]*(?=\\s*:\\s*\\[)"
+        },
+        {
+            "name": "int_lit.sk",
+            "match": "\\b(?:[0-9]+|0[bB][01]+|0[xX][0-9A-Fa-f]+|0[oO][0-7]+|0[dD][0-9]+)\\b"
+        },
+        {
+            "name": "separator.sk",
+            "match": "(::|:|,|\\.)"
+        },
+        {
+            "name": "str_lit.sk",
+            "begin": "\"",
+            "end": "\"",
+            "patterns": [
+                {
+                    "name": "escape_sym.sk",
+                    "match": "\\\\(?:n|0)"
+                }
+            ]
+        },
+        {
+            "name": "operator_stack.sk",
+            "match": "(@>|<@|\\*>|'>|//|><)"
+        },
+        {
+            "name": "operator_arithmetic.sk",
+            "match": "(\\+|-|/|\\*|%)"
+        },
+        {
+            "name": "operator_memory.sk",
+            "match": "(#|!1|!2|!4|!8|@1|@2|@4|@8|!|@)"
+        },
+        {
+            "name": "operator_bitwise.sk",
+            "match": "(<<|>>|\\^|&|\\||~)"
+        },        
+        {
+            "name": "operator_logic.sk",
+            "match": "(<|>|=)"
+        }
+    ]
+}

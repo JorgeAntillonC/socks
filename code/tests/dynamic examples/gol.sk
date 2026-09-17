@@ -1,0 +1,147 @@
+include(".\\stdsk\\rand.sk")
+
+stdout:[ ptr ]
+heap:[ ptr ]
+genw:[ u4 ]
+genh:[ u4 ]
+gena:[ u4 ]
+outputbuff:[ ptr ]
+
+; TODO:: i could just load 8 bytes in one go shift them and then /or the remaning byte instead of looping
+; i don't know what i was thinking
+
+InitExternal:(){
+    RandInit#
+	-11 GetStdHandle# stdout @8
+    GetProcessHeap# heap @8
+}
+
+; grid gridsize
+GridFill:(ptr u4:){
+    while *> {
+        1- '> '> + ; ptr n' ptr'
+        Rand# 256 5 / < >< @1
+    } // //
+}
+
+PrintGrid:(ptr u4:){
+    gridsize:{ u4 }
+    wb:{u4}
+    genh!4+ gridsize @4; ptr
+    
+    0 while *> gridsize!4 <{; ptr n
+        if *> genw!4 1+ % 0 = {
+            10 (u1) '>  outputbuff!8+ @1 ; saving the new line 
+        }
+        else {; ptr n 
+            if '> !1 { 0x4F } ; hex-> 'O'
+            else{  0x20 } ; hex -> ' ' 
+            '> outputbuff!8+ @1
+            >< 1+ ><
+        } ; ptr n
+        1+
+    } // //
+    stdout!8 outputbuff!8 gridsize!4 wb null WriteFile# //
+    ; the 16 in \x1b[16A\r is the only thing messing around with the generalization of any w and h grid
+    ; i could just write a proc that functions as CstrFmt but that's over kill for now, it's fine since you know it's possible  
+    stdout!8 "\x1b[16A\r" wb null WriteFile# //
+}
+
+main:(){
+    grids:{ 2 ptr } 
+    cgrid:{ 1 u1 }
+    InitExternal#
+    32(u4) genw @4
+    16(u4) genh @4
+    genw!1 genh!1 * gena@4
+    
+    heap!8 0x08 gena!4 genh!4+(u8) HeapAlloc# outputbuff@8
+    ; 0x08 it's a flag that zero initilizes the allocated memory 
+    heap!8 0x08 gena!4 1<<(u8) HeapAlloc# 
+    
+    grids '> gena!4+ grids 8+ @8 @8
+    grids!8 gena!4 GridFill#
+
+    8(u1) cgrid@1
+    0 while *> 200 < {
+        cgrid!1 8^ *> (u1) cgrid@1
+       
+        grids+!8 *> ; prvgen prvgen
+        cgrid!1 8^ grids+!8; prvgen prvgen nxtgn 
+       
+        gena!4 UpdateGrid#
+        gena!4 PrintGrid#
+        1+
+    } //
+}
+
+; TODO:: make it so it wraps around
+; use ptr math, instead of the lassy % and /
+; prvgn nxtgn gridsize
+UpdateGrid:(ptr ptr u4:){
+    prvgen:{ptr} ; prev generation
+    nxtgen:{ptr} ; nxt generation
+    neighbours:{u1}
+    @> nxtgen@8 prvgen@8
+
+    while *> { ; prvgen nxtgen n
+        1- 0(u1) neighbours@1
+        *> genw!4 % ; n x
+        '> genw!4 / ; n x y
+        
+        ; 0 1 2
+        ; 7 n 3
+        ; 6 5 4
+        ; n x y
+        
+        if '> 1- genw!4 < '> 1- genh!4 < &{
+            <@ *> 1- genw!4- prvgen!8+ !1
+            neighbours!1+ neighbours@1 @>
+        }
+        if *> 1- genh!4 <{
+            <@ *> genw!4- prvgen!8+ !1
+            neighbours!1+ neighbours@1 @>
+        }
+        if '> 1+ genw!4 < '> 1- genh!4 < &{
+            <@ *> 1+ genw!4- prvgen!8+ !1
+            neighbours!1+ neighbours@1 @>
+        }
+        if '> 1+ genw!4 < {
+            <@ *> 1+ prvgen!8+ !1
+            neighbours!1+ neighbours@1 @>
+        }
+        if '> 1+ genw!4 < '> 1+ genh!4 < &{
+            <@ *> 1+ genw!4+ prvgen!8+ !1
+            neighbours!1+ neighbours@1 @>
+        }
+        if *> 1+ genh!4 <{
+            <@ *> genw!4+ prvgen!8+ !1
+            neighbours!1+ neighbours@1 @>
+        }
+        if '> 1- genw!4 < '> 1+ genh!4 < &{
+            <@ *> 1- genw!4+ prvgen!8+ !1
+            neighbours!1+ neighbours@1 @>
+        }
+        if '> 1- genw!4 <{
+            <@ *> 1- prvgen!8+ !1
+            neighbours!1+ neighbours@1 @>
+        }
+        // //
+        if *> prvgen!8+ !1 { neighbours!1 2 = neighbours!1 3 = ^ }
+        else{ neighbours!1 3 = }
+        '> nxtgen!8+ @1
+    }
+    //
+}
+
+; IO
+GetStdHandle:(s4:ptr) extrn("kernel32.dll" "GetStdHandle")
+WriteFile:(ptr ptr u4 ptr ptr:u1) extrn("kernel32.dll" "WriteFile")
+; Mem
+GetProcessHeap:(:ptr) extrn("kernel32.dll" "GetProcessHeap")
+; heap flags size : ptr
+HeapAlloc:(ptr s4 u8: ptr) extrn("kernel32.dll" "HeapAlloc")
+; heap flags(0) HeapAlloc ptr : success bool
+HeapFree:(ptr s4 ptr: u4) extrn("kernel32.dll" "HeapFree")
+; millisecs
+Sleep:(u4:) extrn("kernel32.dll" "Sleep")

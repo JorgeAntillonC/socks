@@ -1,0 +1,53 @@
+stdout:[ptr]
+
+InitExternal:(){
+    -11 GetStdHandle# stdout@8
+}
+
+Putc:(u1){
+    c:{u1}
+    wb:{u4}
+    c @1
+    stdout!8 c 1 (u4) wb null WriteFile# // 
+}
+
+num2str:(ptr u4: ptr u4){
+    start:{ ptr }
+    len:{ u4 }
+    
+    '> start@8
+    >< '> ; n ptr n 
+    10% 48+ (u1) '> @1
+    1+ >< 10 /
+    while *> {; ptr n
+        >< '> ; n ptr n 
+        10% 48+ (u1) '> @1
+        1+ >< 10 /  
+    } //
+
+    ; d d d d d 
+    ; 0 1 2 3 4 5
+    *> start!8-(u4) len@4
+    start!8
+    >< 
+    while '> '> < { ; s e
+        1- *> !1; s e' t
+        <@ *> !1 @>; e' t2 t s
+        >< '> @1; e' t2 s
+        1+ @> '> @1; s' e'
+    } // //
+    start!8 len !4
+}
+
+main:(){
+    buff:{ 256 u1 }
+    wb: { u4 }
+    InitExternal#
+
+    stdout!8 buff 69420 (u4) num2str# wb null WriteFile#//
+    10 (u1) Putc#
+}
+
+; file handle, buff, buffs, writen bytes, someweird struct ptr
+WriteFile:(ptr ptr u4 ptr ptr:u1) extrn("kernel32.dll" "WriteFile")
+GetStdHandle:(s4:ptr) extrn("kernel32.dll" "GetStdHandle")

@@ -1,0 +1,23 @@
+
+;;
+	the stack is the main working area of a socks program
+	values are pushed onto it and operations consume the
+	values they need and push back their results
+
+	each value on the stack takes up a slot of the size of
+	its type, aligned to eight bytes internally, but the
+	program only sees values in terms of their declared type
+
+	integer literals push their value
+	operators like + - * / consume two values and push one
+	built-in words like dmp consume one value and push nothing
+
+	the stack must be balanced at every scope boundary:
+	the net effect of a procedure body, branch body, or loop
+	body must match the declared signature or the required
+	shape of the enclosing construct
+;;
+
+main:(){
+    1 2 + dmp
+}

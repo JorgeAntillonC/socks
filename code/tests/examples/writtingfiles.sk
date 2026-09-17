@@ -1,0 +1,25 @@
+
+main:(){
+    ; handle, directory, filesize, file inedex
+    file:{ ptr }
+    wb:{ u4 }
+
+    IO_Init#
+
+    "hello from socks.txt\0"//
+    GENERIC_WRITE!4
+    FILE_SHARE_ALL!4
+    null
+    CREATE_ALWAYS!4
+    0(u4)
+    null CreateFileA# file@8
+    
+    if file!8 -1(ptr) = { GetLastError# dmp }
+    else{
+        file!8 "hello, wear some nice socks!" wb null WriteFile# //
+        wb!4 dmp
+        file!8 CloseHandle# //
+    }
+}
+
+include("stdsk\\io.sk")

@@ -1,0 +1,9 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: examples\num2str.sk
+69420
+the program has halted!!!
+
+---STDERR---

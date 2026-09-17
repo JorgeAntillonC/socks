@@ -1,0 +1,4 @@
+; ERROR: 'foo' not declared
+main:(){
+    foo#
+}

@@ -1,0 +1,26 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: errors\error_openblocks.sk
+[31mERROR[37m::missing while's condtion at C:\projects\socks\code\tests\errors\error_openblocks.sk:3:7
+
+[31mERROR[37m::missing if's condtion at C:\projects\socks\code\tests\errors\error_openblocks.sk:4:9
+
+[31mERROR[37m::rogue (flow:elif) at C:\projects\socks\code\tests\errors\error_openblocks.sk:6:9
+
+[31mERROR[37m::missing elif's condtion at C:\projects\socks\code\tests\errors\error_openblocks.sk:6:9
+
+[31mERROR[37m::premature eof at C:\projects\socks\code\tests\errors\error_openblocks.sk:6:15
+
+[31mERROR[37m::mising } pair for main's block at C:\projects\socks\code\tests\errors\error_openblocks.sk:2:1
+
+[31mERROR[37m::mising } pair for while's block at C:\projects\socks\code\tests\errors\error_openblocks.sk:3:7
+
+[31mERROR[37m::mising } pair for if's block at C:\projects\socks\code\tests\errors\error_openblocks.sk:4:9
+
+[31mERROR[37m::mising } pair for elif's block at C:\projects\socks\code\tests\errors\error_openblocks.sk:6:9
+
+The problem is always at Layer 8: the user.
+
+---STDERR---

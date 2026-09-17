@@ -1,0 +1,9 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: examples\writtingfiles.sk
+28
+the program has halted!!!
+
+---STDERR---

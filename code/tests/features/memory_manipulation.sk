@@ -1,0 +1,49 @@
+;;
+	a static memory layout is declared at the top level as:
+	sym : [ members ]
+
+	the syntax inside the brackets is the same as for
+	dynamic memory layouts
+
+	static layouts live in the read-only data section of
+	the program, they exist for the whole run of the
+	program, and there is exactly one instance of each
+
+	the name evaluates to the base address of the layout
+	as a pointer, so pointer arithmetic on it indexes
+	into the layout by byte (for now)
+
+	the type of the pointer is inferred from the first
+	primitive in the layout, so `sym+` advances by that
+	type's size when used with the type-aware operators
+
+	the size-specific operators write to and read from
+	a memory address:
+	@1 @2 @4 @8 write a u1, u2, u4 or u8 to the address
+	!1 !2 !4 !8 read a u1, u2, u4 or u8 from the address
+
+	@ and ! without a size infer the size from the top
+	value's type when it is a primitive
+
+	write operators consume the address and a to write value
+	read operators consume the address and push the read value
+;;
+
+
+staticmem:[256 s4]
+
+main:(){
+    0 while *> 256 <{ ; n
+        *> *> ; n n n
+        staticmem+ ; n n  (staticmem n +) 
+        @1; n (n  (staticmem n +) @1)
+        1 +; (n 1 +)
+    } //
+
+    0 while *> 256 <{ ; n
+        *> staticmem + ; n (staticmem n +) 
+        !1; n ((staticmem n +) !1)
+        dmp; n
+        1 +; (n 1 +)
+    } //
+}

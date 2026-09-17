@@ -1,0 +1,8 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: examples\opengl_triangle.sk
+the program has halted!!!
+
+---STDERR---

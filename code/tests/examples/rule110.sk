@@ -1,0 +1,74 @@
+stdout:[ ptr ]
+heap:[ ptr ]
+outputbuff:[ ptr ]
+outputbuffw:[ u8 ]
+
+InitExternal:(){
+	-11 GetStdHandle# stdout@8
+    GetProcessHeap# heap@8
+}
+
+main:(){
+    InitExternal#
+    191(u8) outputbuffw@8
+    heap!8 0x08 outputbuffw!8 HeapAlloc# outputbuff@8
+    
+    200(u4) RenderGen#
+    
+    heap!8 0 outputbuff!8 HeapFree# //
+}
+
+
+RenderGen:(u4){
+    wb:{ u4 } prvgen:{ ptr } nxtgen:{ ptr } genw:{ u4 }
+
+    outputbuffw!8 1-(u4) genw @4
+    heap!8 0x08 genw!4(u8) HeapAlloc# prvgen@8
+    heap!8 0x08 genw!4(u8) HeapAlloc# nxtgen@8
+    1 (u1) genw!4 1- prvgen!8+ @1
+
+    0 >< while '> '> < { ; 0 n 0 n <        
+        0 while *> genw!4 <{; n
+            if *> prvgen!8+ !1 { 0x4F(u1) }
+            else{ 0x20(u1) }
+            '> outputbuff!8+ @1
+            1+
+        } //
+        0x0A(u1) outputbuffw!8 1- outputbuff!8+ @1
+        stdout!8 outputbuff!8 outputbuffw!8(u4) wb null WriteFile# //
+        0 while *> genw!4 <{ ; n
+            ; c ^ r + c!l
+            if *> 1+ genw!4 < { *> 1+ prvgen!8+ !1 (s4) }
+            else{ 0 }
+            >< ; r n
+            *> prvgen!8+ !1  >< ; r c n
+            @> ; n r c
+            >< '> ^; n c (r c ^)
+            >< <@; x c n
+            if *> 1- genw!4 < { *> 1-prvgen!8+ !1 (s4) }
+            else{ 0 }
+            ; x c n l
+            <@ >< ~ & <@ | (u1)
+            '> nxtgen!8+ @1; n
+            1+
+        } //
+        prvgen!8 nxtgen!8
+        prvgen@8 nxtgen@8
+        >< 1+ ><
+    }// //
+    heap!8 0 nxtgen!8 HeapFree#//
+    heap!8 0 prvgen!8 HeapFree#//
+}
+
+
+; IO
+GetStdHandle:(s4:ptr) extrn("kernel32.dll" "GetStdHandle")
+WriteFile:(ptr ptr u4 ptr ptr:u1) extrn("kernel32.dll" "WriteFile")
+; Mem
+GetProcessHeap:(:ptr) extrn("kernel32.dll" "GetProcessHeap")
+; heap flags size : ptr
+HeapAlloc:(ptr s4 u8: ptr) extrn("kernel32.dll" "HeapAlloc")
+; heap flags(0) ptr : success bool
+HeapFree:(ptr s4 ptr: u4) extrn("kernel32.dll" "HeapFree")
+; millisecs
+Sleep:(u4:) extrn("kernel32.dll" "Sleep")

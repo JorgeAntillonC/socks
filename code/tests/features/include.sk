@@ -1,0 +1,9 @@
+include(".\\stdsk\\rand.sk")
+
+main:(){
+    RandInit#
+    0 while *> 10 <{
+        Rand# dmp
+        1+
+    } // 
+}

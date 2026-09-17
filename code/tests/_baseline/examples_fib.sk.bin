@@ -1,0 +1,9 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: examples\fib.sk
+55
+the program has halted!!!
+
+---STDERR---

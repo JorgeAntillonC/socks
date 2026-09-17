@@ -1,0 +1,2 @@
+foo:(:s4) extrn("kernel32.dll")
+main:(){}

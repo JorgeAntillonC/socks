@@ -1,0 +1,7 @@
+; ERROR: malformed memory layout definition
+layout0:[ 10 ]
+layout1:[
+
+main:(){
+    layout0:{ 10 }
+    layout1:{

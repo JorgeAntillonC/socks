@@ -1,0 +1,13 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: errors\error_undefsym.sk
+think about gardening instead
+[31mERROR[37m::the symbol { foo } was used in the procedure { main } with out declaring it first at C:\projects\socks\code\tests\errors\error_undefsym.sk:3:5
+
+[31mERROR[37m::an uncallable address reach the call at C:\projects\socks\code\tests\errors\error_undefsym.sk:3:8
+
+Missing basic cognitive function between the keyboard and the chair.
+
+---STDERR---

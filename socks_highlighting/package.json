@@ -1,0 +1,34 @@
+{
+    "name": "socks",
+    "displayName": "socks",
+    "description": "syntax highlighting for socks",
+    "version":"0.0.1",
+    "publisher": "jaac",
+    "engines":{
+        "vscode": "^1.80.0"
+    },
+    "contributes": {
+        "languages":[
+            {
+                "id": "socks",
+                "aliases": [ "socks", "stack-oriented computational kernel syntax"],
+                "extensions": [ ".sk", ".socks"],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars":[
+            {
+                "language": "socks",
+                "scopeName": "source.sk",
+                "path": "./syntaxes/socks.tmLanguage.json"
+            }
+        ],
+        "themes": [
+            {
+                "label": "SK Dark",
+                "uiTheme": "vs-dark",
+                "path": "./themes/sk-dark.json"
+            }
+        ]
+    }
+}

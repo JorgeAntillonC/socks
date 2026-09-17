@@ -1,0 +1,36 @@
+;;
+	a string literal is written as:
+	"any text here"
+
+	it evaluates to two values on the stack:
+	a pointer to the first byte, followed by the length
+	of the string as a u4
+
+	escape sequences supported inside the literal:
+	\n \r \\ \0<octal> \x<hex>
+;;
+
+main:(){
+	stdout:{ ptr }
+	writtenbytes:{ u4 }
+	-11 GetStdHandle# stdout @4
+	stdout!8 "hello word\n" writtenbytes null WriteFile# //
+	writtenbytes !4 dmp
+}
+
+;;
+	an external procedure is declared as:
+	name:( args : rets ) extrn("library" "symbol")
+
+	args and rets list the types the external function
+	expects and returns
+	an external procedure with no return type still yields
+	nothing on the stack when called
+	call it like any other proc using name#
+	the compiler resolves the library and symbol at load time
+	and patches the call site with the actual address
+;;
+
+; file handle, buff, buffs, writen bytes, someweird struct ptr
+WriteFile:(ptr ptr u4 ptr ptr:u1) extrn("kernel32.dll" "WriteFile")
+GetStdHandle:(s4:ptr) extrn("kernel32.dll" "GetStdHandle")

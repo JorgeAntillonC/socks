@@ -1,0 +1,24 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: errors\error_syms_1.sk
+[31mERROR[37m::rogue (sym:foo) at C:\projects\socks\code\tests\errors\error_syms_1.sk:2:1
+
+[31mERROR[37m::rogue (num:4) at C:\projects\socks\code\tests\errors\error_syms_1.sk:2:5
+
+[31mERROR[37m::missing { : } after symbol { main } at C:\projects\socks\code\tests\errors\error_syms_1.sk:6:1
+
+[31mERROR[37m::misplaced { (num:4) } after symbol { main }; expected { : } instead at C:\projects\socks\code\tests\errors\error_syms_1.sk:10:6
+
+[31mERROR[37m::redefinition of { main } at C:\projects\socks\code\tests\errors\error_syms_1.sk:10:1
+
+[31mERROR[37m::misplaced { (op:add) } after symbol { sym }; expected { : } instead at C:\projects\socks\code\tests\errors\error_syms_1.sk:14:5
+
+[31mERROR[37m::redefinition of { sym } at C:\projects\socks\code\tests\errors\error_syms_1.sk:14:1
+
+[31mERROR[37m::redefinition of { sym } at C:\projects\socks\code\tests\errors\error_syms_1.sk:18:1
+
+404: Common sense not found.
+
+---STDERR---

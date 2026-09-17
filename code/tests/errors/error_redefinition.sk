@@ -1,0 +1,8 @@
+; ERROR: redefinition of 'foo'
+foo:(:s4){ 69 }
+
+main:(){
+    foo:(:s4){ 42069 }
+}
+
+foo:(:s4){ 420 }

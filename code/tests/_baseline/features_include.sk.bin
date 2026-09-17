@@ -1,0 +1,18 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: features\include.sk
+115
+144
+47
+172
+189
+253
+84
+26
+144
+187
+the program has halted!!!
+
+---STDERR---

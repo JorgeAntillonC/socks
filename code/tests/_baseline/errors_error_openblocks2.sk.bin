@@ -1,0 +1,20 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: errors\error_openblocks2.sk
+[31mERROR[37m::malformed memory layout member missing typing at C:\projects\socks\code\tests\errors\error_openblocks2.sk:2:11
+
+[31mERROR[37m::mising ] for static memory layout definiton's block at C:\projects\socks\code\tests\errors\error_openblocks2.sk:3:1
+
+[31mERROR[37m::malformed memory layout member missing typing at C:\projects\socks\code\tests\errors\error_openblocks2.sk:6:15
+
+[31mERROR[37m::premature eof at C:\projects\socks\code\tests\errors\error_openblocks2.sk:7:14
+
+[31mERROR[37m::mising } pair for main's block at C:\projects\socks\code\tests\errors\error_openblocks2.sk:5:1
+
+[31mERROR[37m::mising } for dynamic memory layout definiton's block at C:\projects\socks\code\tests\errors\error_openblocks2.sk:7:5
+
+Identifier not found. Much like your understanding of basic programming concepts.
+
+---STDERR---

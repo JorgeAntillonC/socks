@@ -1,0 +1,13 @@
+rand_seed:[u8]
+
+Rand:(:u1){
+   rand_seed!8 
+   *> 17 >> ^
+   *> 19 << ^
+   *> 5 >> ^
+   *> rand_seed@8 255&(u1)
+}
+
+RandInit:(){
+    0x0123456789ABCDEF(u8) rand_seed @8
+}

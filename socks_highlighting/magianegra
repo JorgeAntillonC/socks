@@ -1,0 +1,6 @@
+P:\A\vs-highlighting\socks>npx @vscode/vsce package
+
+Press Ctrl+Shift+P
+Search for Extensions: Install from VSIX...
+Select socks-0.0.1.vsix
+Reload VS Code.

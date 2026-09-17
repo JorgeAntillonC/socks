@@ -1,0 +1,16 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: errors\error_strs.sk
+[31mERROR[37m::unknown scapecode { q } at C:\projects\socks\code\tests\errors\error_strs.sk:3:5
+
+[31mERROR[37m::premature eof while defining string literal at C:\projects\socks\code\tests\errors\error_strs.sk:3:5
+
+[31mERROR[37m::premature eof at C:\projects\socks\code\tests\errors\error_strs.sk:3:23
+
+[31mERROR[37m::mising } pair for main's block at C:\projects\socks\code\tests\errors\error_strs.sk:2:1
+
+Honestly, just delete the whole file and start over. Or better yet, do not.
+
+---STDERR---

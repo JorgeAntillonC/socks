@@ -1,0 +1,4 @@
+; ERROR: unknown escape \q
+main:(){
+    "bad \q escape 
+}

@@ -1,0 +1,7 @@
+; ERROR: call to foo expects 2 args but only 1 provided
+foo:(s4 s4:){
+    1+
+}
+main:(){
+    1 foo#
+}

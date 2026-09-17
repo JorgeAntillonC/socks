@@ -1,0 +1,6 @@
+main:(){
+    IO_Init#
+    "hello world!!!!\n" IO_Print#
+}
+
+include("stdsk\\io.sk")

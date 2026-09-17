@@ -1,0 +1,10 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: errors\error_wrongretv.sk
+[31mERROR[37m::(type:u1 0) differs from the return value (type:s4 0) from call foo at C:\projects\socks\code\tests\errors\error_wrongretv.sk:2:7
+
+Trying to compile this garbage consumed electricity that could have powered a hospital.
+
+---STDERR---

@@ -1,0 +1,31 @@
+; windows api funcs
+;;
+WINBASEAPI HANDLE WINAPI CreateFileA(
+    _In_ LPCSTR lpFileName,
+    _In_ DWORD dwDesiredAccess,
+    _In_ DWORD dwShareMode,
+    _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+    _In_ DWORD dwCreationDisposition,
+    _In_ DWORD dwFlagsAndAttributes,
+    _In_opt_ HANDLE hTemplateFile
+);
+;;
+CreateFileA:(ptr u4 u4 ptr u4 u4 ptr:ptr) extrn("Kernel32.dll" "CreateFileA")
+
+; WINBASEAPI BOOL WINAPI CloseHandle(_In_ _Post_ptr_invalid_ HANDLE hObject);
+CloseHandle:(ptr:s4) extrn("Kernel32.dll" "CloseHandle")
+
+;;
+WINBASEAPI BOOL WINAPI WriteFile(
+    _In_ HANDLE hFile,
+    _In_reads_bytes_opt_(nNumberOfBytesToWrite) LPCVOID lpBuffer,
+    _In_ DWORD nNumberOfBytesToWrite,
+    _Out_opt_ LPDWORD lpNumberOfBytesWritten,
+    _Inout_opt_ LPOVERLAPPED lpOverlapped
+    );
+;;
+WriteFile:(ptr ptr u4 ptr ptr:s4) extrn("kernel32.dll" "WriteFile")
+; WINBASEAPI HANDLE WINAPI GetStdHandle(_In_ DWORD nStdHandle);
+GetStdHandle:(s4:ptr) extrn("kernel32.dll" "GetStdHandle")
+
+GetLastError:(:u4) extrn("Kernel32.dll" "GetLastError")

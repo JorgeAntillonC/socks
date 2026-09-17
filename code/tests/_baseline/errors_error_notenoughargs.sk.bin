@@ -1,0 +1,12 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: errors\error_notenoughargs.sk
+[31mERROR[37m::the procdedure foo has an unbalanced stack of 2 at C:\projects\socks\code\tests\errors\error_notenoughargs.sk:2:5
+
+[31mERROR[37m::not enough operands to call { foo } expected 2 but recived 1 at C:\projects\socks\code\tests\errors\error_notenoughargs.sk:6:10
+
+Missing basic cognitive function between the keyboard and the chair.
+
+---STDERR---

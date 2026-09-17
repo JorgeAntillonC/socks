@@ -1,0 +1,15 @@
+
+;;
+	A while loop construct is written as:
+	while ops0 { ops1 }
+	ops0 must produce an extra element on the stack
+	depending if it is non-zero or zero the body { ops1 }
+	will be executed or not, respectively
+	ops1, must not produce extra values on the stack
+	in other words the stack must stay balanced
+;;
+
+main:(){
+	10 while *>      { 1- *> dmp } // 
+	0  while *> 10 < { *> dmp 1+ } //
+}

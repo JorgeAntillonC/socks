@@ -1,0 +1,9 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: features\casting.sk
+4294967295
+the program has halted!!!
+
+---STDERR---

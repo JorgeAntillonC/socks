@@ -1,0 +1,8 @@
+main:(){
+    10 factorial# dmp
+}
+
+factorial:(s4:s4){
+    if *> { *> 1- factorial# * }
+    else{ // 1 }
+}

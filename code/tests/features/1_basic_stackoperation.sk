@@ -1,0 +1,25 @@
+;;
+	basic stack operations:
+
+	// drops the top value. so 'a b' becomes 'a'
+	*> duplicates the top value, so it appears twice
+	   in a row. so 'a b' becomes 'a b b'
+	>< swaps the top two values. so 'a b' becomes 'b a'
+	'> copies the second value from the top onto the top of
+	   the stack, so 'a b' becomes 'a b a'
+	@> rotates the top three forward, so the value
+	   that was on top moves down. so 'a b c' becomes 'c a b'
+	<@ rotates the top three backward, so the value
+	   that was third moves up to the top. so 'a b c' becomes 'b c a'
+;;
+
+
+main:(){
+    10 //
+    10 *> dmp dmp
+    10 20 dmp dmp 
+    10 20 >< dmp dmp 
+    10 20 '> dmp dmp dmp
+    1 2 3 @> dmp dmp dmp
+    1 2 3 <@ dmp dmp dmp
+}

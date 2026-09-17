@@ -1,0 +1,5 @@
+; ERROR: body returns u1 but signature expects s4
+foo:(:s4){
+    1(u1)
+}
+main:(){}

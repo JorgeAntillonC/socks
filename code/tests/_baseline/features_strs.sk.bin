@@ -1,0 +1,10 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: features\strs.sk
+hello word
+11
+the program has halted!!!
+
+---STDERR---

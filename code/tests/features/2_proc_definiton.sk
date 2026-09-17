@@ -1,0 +1,35 @@
+
+;;
+	a procedure definition is written as:
+	name:( args : rets ) { body }
+
+	args and rets list the types the procedure consumes
+	from the stack and returns to it
+	an empty list means no values on that side
+	the : may be omitted if there are no return values
+
+	the body must consume the arguments and leave exactly
+	the return values on the stack, in the order declared
+
+	a procedure is called by writing its name followed by #
+	the arguments must already be on the stack when the call
+	is made, and the return values will be on the stack when
+	it finishes
+
+	definitions do not need to appear before their first
+	use; the compiler resolves the name across the whole
+	compilation unit
+
+	execution starts at the entry point
+	the entry point is user-defined
+	by default the compiler looks for a procedure called
+	'main', but this can be changed with a compiler flag
+;;
+
+foo:(:s4){ 35 }
+
+main:() {
+     foo# bar# + dmp
+}
+
+bar:(:s4) { 34 }

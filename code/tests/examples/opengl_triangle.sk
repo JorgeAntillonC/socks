@@ -1,0 +1,93 @@
+user32:[ ptr ]
+gdi32:[ ptr ]
+window:[ ptr ]
+dc:[ ptr ]
+glctx:[ ptr ]
+heap:[ ptr ]
+pfd:[ ptr ]
+format:[ s4 ]
+
+Init:(){
+    GetProcessHeap# heap @8
+}
+
+; PIXELFORMATDESCRIPTOR is zeroed by HeapAlloc.
+; The fields used here are: nSize=0, nVersion=2, dwFlags=4, iPixelType=8, cColorBits=9, cDepthBits=17.
+MakePixelFormat:(){
+    heap!8 0x08 40(u8) HeapAlloc# pfd @8
+    40(u4) pfd!8 + 0(u4) >< @4
+    0x00010028(u4) pfd!8 + 0(u4) >< @4
+    0x25(u4) pfd!8 4(u4) + 0(u4) >< @4 //
+    0 pfd!8 8(u4) + 0(u1) >< @1 //
+    24(u1) pfd!8 9(u4) + 0(u1) >< @1 //
+    16(u1) pfd!8 17(u4) + 0(u1) >< @1 //
+}
+
+Render:(){
+    0x0404(u4) glDrawBuffer#
+    0 0 640 480 glViewport#
+    0x4000(u4) glClear#
+    0x0004(u4) glBegin#
+
+    255(u1) 0(u1) 0(u1) glColor3ub#
+    -1 -1 glVertex2s#
+
+    0(u1) 255(u1) 0(u1) glColor3ub#
+    1 -1 glVertex2s#
+
+    0(u1) 0(u1) 255(u1) glColor3ub#
+    0 1 glVertex2s#
+
+    glEnd#
+    glFlush#
+}
+
+main:(){
+    Init#
+    0(u4) "STATIC\0"// "Socks OpenGL Triangle\0"// 0x00CF0000(u4)
+    100 100 640 480
+    null null null null CreateWindowExA# window @8
+
+    window!8 1 ShowWindow#
+    window!8 UpdateWindow#
+    window!8 GetDC# dc @8
+
+    MakePixelFormat#
+    dc!8 pfd!8 ChoosePixelFormat# format @4
+    dc!8 format!4 pfd!8 SetPixelFormat#
+    dc!8 wglCreateContext# glctx @8
+    dc!8 glctx!8 wglMakeCurrent# //
+    Render#
+    500(u4) Sleep#
+}
+
+
+
+; User32
+CreateWindowExA:(u4 ptr ptr u4 s4 s4 s4 s4 ptr ptr ptr ptr:ptr) extrn("user32.dll" "CreateWindowExA")
+ShowWindow:(ptr s4) extrn("user32.dll" "ShowWindow")
+UpdateWindow:(ptr) extrn("user32.dll" "UpdateWindow")
+GetDC:(ptr:ptr) extrn("user32.dll" "GetDC")
+Sleep:(u4) extrn("kernel32.dll" "Sleep")
+
+; GDI
+ChoosePixelFormat:(ptr ptr:s4) extrn("gdi32.dll" "ChoosePixelFormat")
+SetPixelFormat:(ptr s4 ptr) extrn("gdi32.dll" "SetPixelFormat")
+SwapBuffers:(ptr) extrn("gdi32.dll" "SwapBuffers")
+
+; OpenGL 1.x fixed-function API
+wglCreateContext:(ptr:ptr) extrn("opengl32.dll" "wglCreateContext")
+wglMakeCurrent:(ptr ptr:u1) extrn("opengl32.dll" "wglMakeCurrent")
+glClear:(u4) extrn("opengl32.dll" "glClear")
+glDrawBuffer:(u4) extrn("opengl32.dll" "glDrawBuffer")
+glViewport:(s4 s4 s4 s4) extrn("opengl32.dll" "glViewport")
+glBegin:(u4) extrn("opengl32.dll" "glBegin")
+glEnd:() extrn("opengl32.dll" "glEnd")
+glFlush:() extrn("opengl32.dll" "glFlush")
+glGetError:(:u4) extrn("opengl32.dll" "glGetError")
+glColor3ub:(u1 u1 u1) extrn("opengl32.dll" "glColor3ub")
+glVertex2s:(s4 s4) extrn("opengl32.dll" "glVertex2s")
+
+; Memory
+GetProcessHeap:(:ptr) extrn("kernel32.dll" "GetProcessHeap")
+HeapAlloc:(ptr s4 u8:ptr) extrn("kernel32.dll" "HeapAlloc")

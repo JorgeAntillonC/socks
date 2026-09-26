@@ -150,6 +150,7 @@ inline static u4 SK_PrimSize2Off(u4 primsize) {
 }
 
 // TODO:: use permanent stacks, don't use this weird creating dynbuffs all the time, that's wasteful
+// TODO:: improve the way dereferencing is handled
 SK_NODE* SK_CheckOp(SK_COMPUNIT* cu, SK_NODE* cnode, DYNBUFF* vstack, u1* errbuff, const u2 debugmode) {
 	if (!cnode) return 0;
 	if (debugmode & sk_dbmd_checker) {
@@ -520,9 +521,20 @@ SK_NODE* SK_CheckOp(SK_COMPUNIT* cu, SK_NODE* cnode, DYNBUFF* vstack, u1* errbuf
 							SK_ErrorAtNode(cu, ndop, "you need at least one element on the stack to cast");
 						}
 					} break;
+					case sk_ndtp_memoff: {
+						// SK_STR* symstr = SK_StrFromSymoff(cu, ndop->symoff);
+						// TODO:: change how 'types' work in more generalaty, do something that covers mlays, mlay fields, proc args, and casts
+						// TOCONSIDER:: maybe i don't need memoff as it's own type of node i could make it into a symbol type instead idk
+						SK_SYMBOL* symte = (SK_SYMBOL*)DB_Index(cu->syms->pool, ndop->symoff);
+						DYNBUFF* ndwebmaly = *(DYNBUFF**)DB_Index(cu->ndwebs, symte->objid);
+						SK_NODE* mlaymemnd = (SK_NODE*)DB_Index(ndwebmaly, (symte->mlaymemoff << 1));
+						SK_NODE* mlaymemtypend = mlaymemnd+1;
+						DB_Push(vstack, &(SK_NODE){.type = sk_ndtp_type, .prim = mlaymemtypend->prim, .primlvl = 1, .primsize = 8, .col = ndop->col, .row = ndop->row });
+					} break;
+					case sk_ndtp_nop: i -= 1; break;
 					default: {
 						SK_NodePrintInfo(cu, ndop);
-						FatalError(0, "checking for the node type { %s } is not implemented yet (outer)\n", sk_ndtp2str[ndop->type]);
+						FatalError(0, "checking for the node type { %s } is not implemented yet (inner)\n", sk_ndtp2str[ndop->type]);
 					} break;
 				}
 				ndop++;

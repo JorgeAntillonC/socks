@@ -73,6 +73,92 @@ void SK_WeaverWeaveProgram(SK_COMPUNIT* cu, const u2 debugmode);
 #ifndef SK_WEAVER_DEF
 #define SK_WEAVER_DEF
 
+void SK_WeaverPrintState(SK_COMPUNIT* cu, SK_NDWEAVER* wv) {
+	u1 buff[512];
+
+	SK_STR* custr = SK_StrFromSymoff(cu, cu->currentcompunit);
+	Print("\n\n%$:%2u:%2u\n", custr->str, (u8)custr->len, wv->row + 1, wv->col + 1);
+	u8 peekedstksize = DB_ElementCount(wv->peekedstk);
+	u8 syntaxstksize = DB_ElementCount(wv->syntaxstk);
+	Print("\n\x1b[31m============syntaxstack=========\ncurrent %4u %4u %4u\n", wv->ssp, wv->peeked, peekedstksize);
+	for (u8 i = 0; i < syntaxstksize; ++i) {
+		SK_NODE* nd = (SK_NODE*)DB_Index(wv->syntaxstk, i);
+		SK_Node2StrSimp(cu, nd, buff);
+		Print("%s", buff);
+	}
+	Print("\n\x1b[31m============peekedstack=========\n");
+	for (u8 i = wv->peeked; i < peekedstksize; ++i) {
+		SK_NODE* nd = (SK_NODE*)DB_Index(wv->peekedstk, i);
+		SK_Node2Str(cu, nd, buff);
+		Print("%s", buff);
+	}
+	Print("\n\x1b[32m============wweb============\n");
+	Print("current: %4i %4i\n", wv->ndgroup.procidx, DB_ElementCount(cu->ndwebs));
+	u4 wprocstacksize = DB_ElementCount(wv->wwebstk);
+	for (u4 i = 0; i < wprocstacksize; i++) {
+		SK_WEAVERSTKSTT* stkstt = (SK_WEAVERSTKSTT*)DB_Index(wv->wwebstk, i);
+		Print("(%4i)", stkstt->proc.procidx);
+	}
+	Print("\n");
+	if ((u8)wv->wweb != (u8)(-1)) {
+		u8 nodepoolsize = DB_ElementCount(wv->wweb);
+		for (u8 i = 0; i < nodepoolsize; ++i) {
+			SK_NODE* nd = (SK_NODE*)DB_Index(wv->wweb, i);
+			SK_Node2Str(cu, nd, buff);
+			Print("%s", buff);
+			if (i % 10 == 0) { Print("\n"); }
+		}
+	}
+	Print("\n\x1b[33m============ndgroupstack==========\n");
+	Print("current: %4u %4u\n", wv->ndgroup.off, wv->ndgroup.len);
+	u8 wnodestksize = DB_ElementCount(wv->ndgroupstk);
+	for (u8 i = 0; i < wnodestksize; ++i) {
+		SK_WEAVERSTKSTT* entry = (SK_WEAVERSTKSTT*)DB_Index(wv->ndgroupstk, i);
+		Print("(%4u %4u)", entry->ndgroup.off, entry->ndgroup.len);
+	}
+	Print("\n\x1b[34m============strentries==========\n");
+	u4 strsentrycount = DB_Size(cu->strs->entries);
+	u4 stroccentries = DB_ElementCount(cu->strs->entries);
+	Print("%4u/%4u\n", stroccentries, strsentrycount);
+	PHTENTRY* strentry = (PHTENTRY*)DB_Index(cu->strs->entries, 0);
+	for (u4 i = 0; i < strsentrycount; i++) {
+		if (strentry->state) {
+			SK_STR* skstr = (SK_STR*)DB_Index(cu->strs->pool, strentry->off);
+			CstrFromRawBytes(skstr->str, (u4)skstr->len, buff, 256);
+			Print("(%4u:%s)", strentry->off, buff);
+		}
+		strentry++;
+	}
+	Print("\n\x1b[35m===========symentries===========\n");
+	u4 symsentrycount = DB_Size(cu->syms->entries);
+	u4 symsoccentries = DB_ElementCount(cu->syms->entries);
+	Print("%4u/%4u\n", symsoccentries, symsentrycount);
+	PHTENTRY* symentry = (PHTENTRY*)DB_Index(cu->syms->entries, 0);
+	for (u4 i = 0; i < symsentrycount; i++) {
+		if (symentry->state) {
+			SK_SYMBOL* sksym = (SK_SYMBOL*)DB_Index(cu->syms->pool, symentry->off);
+			SK_STR* skstr = (SK_STR*)DB_Index(cu->strs->pool, sksym->stroff);
+			CstrFromRawBytes(skstr->str, (u4)skstr->len, buff, 256);
+			Print("(%4u:%4u:%4u %s %s)", symentry->off, sksym->objid, sksym->scopeid, buff, sk_symtp2str[sksym->type]);
+		}
+		symentry++;
+	}
+	Print("\n\x1b[36m========scopestack==============\n");
+	Print("current: %4u %4u %4u\n", wv->scope.id, wv->scope.counter, wv->scope.symc);
+	u8 scopestksize = DB_ElementCount(wv->scopestk);
+	for (u8 i = 0; i < scopestksize; ++i) {
+		SK_WEAVERSTKSTT* entry = (SK_WEAVERSTKSTT*)DB_Index(wv->scopestk, i);
+		Print("(%4u %4u)", entry->scope.id, entry->scope.symc);
+	}
+	Print("\n============unresolvedsyms======\n");
+	u8 symstksize = DB_ElementCount(wv->usymstk);
+	for (u8 i = 0; i < symstksize; ++i) {
+		SK_WEAVERSTKSTT* symoff = (SK_WEAVERSTKSTT*)DB_Index(wv->usymstk, i);
+		Print("(%4u %4u)", symoff->usym.procidx, symoff->usym.procoff);
+	}
+	Print("\n================================\x1b[37m\n\n\n\n");
+}
+
 inline void SK_WeaverDrop(SK_NDWEAVER* weaver, u4 num) {
 	DB_Drop(weaver->syntaxstk, num);
 	weaver->ssp -= num;
@@ -499,9 +585,31 @@ inline u4 SK_WeaverResolvedScopeSymbols(SK_COMPUNIT* cu, SK_NDWEAVER* weaver, u1
 			u8 symkey = ((u8)weaver->scope.id << 32) | nd->symoff;
 			u4 symoff = PHT_Index(cu->syms, &symkey, 8);
 			if (symoff + 1) {
-				*dynamicmemallocs |= ((SK_SYMBOL*)DB_Index(cu->syms->pool, symoff))->type == sk_symtp_dmlay;
 				nd->symf = 1;
 				nd->symoff = symoff;
+				SK_SYMBOL* symte = (SK_SYMBOL*)DB_Index(cu->syms->pool, symoff);
+				if (nd->type == sk_ndtp_memoff && (symte->type == sk_symtp_dmlay || symte->type == sk_symtp_smlay)) {
+					*dynamicmemallocs |= 1;
+					
+					SK_NODE* mlaynd = (SK_NODE*)DB_Index(*(DYNBUFF**)DB_Index(cu->ndwebs, symte->objid), 1);
+					SK_NODE* fieldnd = nd + 1;
+
+					// SK_NodePrintInfo(cu, mlaynd);
+					// SK_NodePrintInfo(cu, fieldnd);
+					u8 fieldkey = ((u8)mlaynd->mlaysym << 32)  | fieldnd->symoff;
+					u4 fieldsymoff = PHT_Index(cu->syms, &(u8){ fieldkey }, 8);
+					if (fieldsymoff + 1) {
+						SK_SYMBOL* fieldsym = (SK_SYMBOL*)DB_Index(cu->syms->pool, fieldsymoff);
+						nd->symoff = fieldsymoff;
+						fieldnd->type = sk_ndtp_nop;
+					}
+					else {
+						// TODO:: this will crash if the next node is not a sym, i should patch it before it gets here
+						SK_STR* mlaystr = SK_StrFromSymoff(cu, mlaynd->mlaysym);
+						SK_STR* fieldstr = (SK_STR*)DB_Index(cu->strs->pool, fieldnd->symoff);
+						SK_ErrorAtNode(cu, nd, "the memory layout { %$ } doesn't have a field named { %$:%x }", mlaystr->str, (u8)mlaystr->len, fieldstr->str, (u8)fieldstr->len, fieldkey);
+					}
+				}
 				resolvedsymc++;
 				*head = *tail--;
 			}
@@ -556,7 +664,7 @@ inline void SK_WeaverRegisterSymbol(SK_COMPUNIT* cu, SK_NDWEAVER* weaver, SK_NOD
 	weaver->wweb = DB_Create(256, sizeof(SK_NODE));
 	DB_Push(cu->ndwebs, &(DYNBUFF*){ weaver->wweb });
 	
-	symnd->symoff = PHT_Insert(cu->syms, &(u8){ symkey }, 8, & (SK_SYMBOL){.type = symboltype, .scopeid = weaver->scope.id, .stroff = symnd->symoff, .objid = weaver->ndgroup.procidx }, sizeof(SK_SYMBOL));
+	symnd->symoff = PHT_Insert(cu->syms, &(u8){ symkey }, 8, & (SK_SYMBOL){.type = symboltype, .key = symkey, .objid = weaver->ndgroup.procidx }, sizeof(SK_SYMBOL));
 	DB_Push(weaver->wweb, &(SK_NODE){.type = sk_ndtp_sym, .symf = 1, .symoff = symnd->symoff });
 	if (symboltype == sk_symtp_proc) {
 		DB_Push(cu->procs, &(u4){ weaver->ndgroup.procidx });
@@ -564,7 +672,7 @@ inline void SK_WeaverRegisterSymbol(SK_COMPUNIT* cu, SK_NDWEAVER* weaver, SK_NOD
 }
 
 inline void SK_WeaverRegisterMemLayField(SK_COMPUNIT* cu, SK_NDWEAVER* weaver, SK_NODE* memlaynd, SK_NODE* symnd) {
-	u8 symkey = ((u8)(weaver->scope.id ^ memlaynd->mlaysym) << 32) | symnd->symoff;
+	u8 symkey = ((u8)(memlaynd->mlaysym) << 32) | symnd->symoff;
 	u4 symoff = PHT_Index(cu->syms, &symkey, 8);
 
 	if (symoff + 1) {
@@ -576,100 +684,18 @@ inline void SK_WeaverRegisterMemLayField(SK_COMPUNIT* cu, SK_NDWEAVER* weaver, S
 			u1 buff[512];
 			do {
 				symnd->symoff = SK_TableStrInsert(cu->strs, buff, CstrFmt(buff, "%$_0x%4xr0", symstr->str, (u8)symstr->len, redefcount++, (u8)8));
-				symkey = ((u8)(weaver->scope.id ^ memlaynd->mlaysym) << 32) | symnd->symoff;
+				symkey = ((u8)(memlaynd->mlaysym) << 32) | symnd->symoff;
 				symoff = PHT_Index(cu->syms, &symkey, 8);
 				sym = (SK_SYMBOL*)DB_Index(cu->syms->pool, symoff);
 			} while (symoff + 1 && sym->type != sk_symtp_undef);
 		}
 	}
+	// SK_STR* ndstr = DB_Index(cu->strs->pool, symnd->symoff);
+	// Print("%$\n", ndstr->str, (u8)ndstr->len);
 	symnd->symf = 1;
-	symnd->symoff = PHT_Insert(cu->syms, &(u8){ symkey }, 8, & (SK_SYMBOL){.type = sk_symtp_mlaymem, .scopeid = weaver->scope.id, .stroff = symnd->symoff, .objid = weaver->ndgroup.procidx, .mlaymemoff = weaver->ndgroup.len }, sizeof(SK_SYMBOL));
-}
-
-void SK_WeaverPrintState(SK_COMPUNIT* cu, SK_NDWEAVER* wv) {
-	u1 buff[512];
-
-	SK_STR* custr = SK_StrFromSymoff(cu, cu->currentcompunit);
-	Print("\n\n%$:%2u:%2u\n", custr->str, (u8)custr->len, wv->row + 1, wv->col + 1);
-	u8 peekedstksize = DB_ElementCount(wv->peekedstk);
-	u8 syntaxstksize = DB_ElementCount(wv->syntaxstk);
-	Print("\n\x1b[31m============syntaxstack=========\ncurrent %4u %4u %4u\n", wv->ssp, wv->peeked, peekedstksize);
-	for (u8 i = 0; i < syntaxstksize; ++i) {
-		SK_NODE* nd = (SK_NODE*)DB_Index(wv->syntaxstk, i);
-		SK_Node2StrSimp(cu, nd, buff);
-		Print("%s", buff);
-	}
-	Print("\n\x1b[31m============peekedstack=========\n");
-	for (u8 i = wv->peeked; i < peekedstksize; ++i) {
-		SK_NODE* nd = (SK_NODE*)DB_Index(wv->peekedstk, i);
-		SK_Node2Str(cu, nd, buff);
-		Print("%s", buff);
-	}
-	Print("\n\x1b[32m============wweb============\n");
-	Print("current: %4i %4i\n", wv->ndgroup.procidx, DB_ElementCount(cu->ndwebs));
-	u4 wprocstacksize = DB_ElementCount(wv->wwebstk);
-	for (u4 i = 0; i < wprocstacksize; i++) {
-		SK_WEAVERSTKSTT* stkstt = (SK_WEAVERSTKSTT*)DB_Index(wv->wwebstk, i);
-		Print("(%4i)", stkstt->proc.procidx);
-	}
-	Print("\n");
-	if ((u8)wv->wweb != (u8)(-1)) {
-		u8 nodepoolsize = DB_ElementCount(wv->wweb);
-		for (u8 i = 0; i < nodepoolsize; ++i) {
-			SK_NODE* nd = (SK_NODE*)DB_Index(wv->wweb, i);
-			SK_Node2Str(cu, nd, buff);
-			Print("%s", buff);
-			if (i % 10 == 0) { Print("\n"); }
-		}
-	}
-	Print("\n\x1b[33m============ndgroupstack==========\n");
-	Print("current: %4u %4u\n", wv->ndgroup.off, wv->ndgroup.len);
-	u8 wnodestksize = DB_ElementCount(wv->ndgroupstk);
-	for (u8 i = 0; i < wnodestksize; ++i) {
-		SK_WEAVERSTKSTT* entry = (SK_WEAVERSTKSTT*)DB_Index(wv->ndgroupstk, i);
-		Print("(%4u %4u)", entry->ndgroup.off, entry->ndgroup.len);
-	}
-	Print("\n\x1b[34m============strentries==========\n");
-	u4 strsentrycount = DB_Size(cu->strs->entries);
-	u4 stroccentries = DB_ElementCount(cu->strs->entries);
-	Print("%4u/%4u\n", stroccentries, strsentrycount);
-	PHTENTRY* strentry = (PHTENTRY*)DB_Index(cu->strs->entries, 0);
-	for (u4 i = 0; i < strsentrycount; i++) {
-		if (strentry->state) {
-			SK_STR* skstr = (SK_STR*)DB_Index(cu->strs->pool, strentry->off);
-			CstrFromRawBytes(skstr->str, (u4)skstr->len, buff, 256);
-			Print("(%4u:%s)", strentry->off, buff);
-		}
-		strentry++;
-	}
-	Print("\n\x1b[35m===========symentries===========\n");
-	u4 symsentrycount = DB_Size(cu->syms->entries);
-	u4 symsoccentries = DB_ElementCount(cu->syms->entries);
-	Print("%4u/%4u\n", symsoccentries, symsentrycount);
-	PHTENTRY* symentry = (PHTENTRY*)DB_Index(cu->syms->entries, 0);
-	for (u4 i = 0; i < symsentrycount; i++) {
-		if (symentry->state) {
-			SK_SYMBOL* sksym = (SK_SYMBOL*)DB_Index(cu->syms->pool, symentry->off);
-			SK_STR* skstr = (SK_STR*)DB_Index(cu->strs->pool, sksym->stroff);
-			CstrFromRawBytes(skstr->str, (u4)skstr->len, buff, 256);
-			Print("(%4u:%4u:%4u %s %s)", symentry->off, sksym->objid, sksym->scopeid, buff, sk_symtp2str[sksym->type]);
-		}
-		symentry++;
-	}
-	Print("\n\x1b[36m========scopestack==============\n");
-	Print("current: %4u %4u %4u\n", wv->scope.id, wv->scope.counter, wv->scope.symc);
-	u8 scopestksize = DB_ElementCount(wv->scopestk);
-	for (u8 i = 0; i < scopestksize; ++i) {
-		SK_WEAVERSTKSTT* entry = (SK_WEAVERSTKSTT*)DB_Index(wv->scopestk, i);
-		Print("(%4u %4u)", entry->scope.id, entry->scope.symc);
-	}
-	Print("\n============unresolvedsyms======\n");
-	u8 symstksize = DB_ElementCount(wv->usymstk);
-	for (u8 i = 0; i < symstksize; ++i) {
-		SK_WEAVERSTKSTT* symoff = (SK_WEAVERSTKSTT*)DB_Index(wv->usymstk, i);
-		Print("(%4u %4u)", symoff->usym.procidx, symoff->usym.procoff);
-	}
-	Print("\n================================\x1b[37m\n\n\n\n");
+	symnd->symoff = PHT_Insert(cu->syms, &(u8){ symkey }, 8, & (SK_SYMBOL){.type = sk_symtp_mlaymem, .key = symkey, .objid = weaver->ndgroup.procidx, .mlaymemoff = weaver->ndgroup.len }, sizeof(SK_SYMBOL));
+	// SK_NodePrintInfo(cu, memlaynd);
+	// SK_NodePrintInfo(cu, symnd);
 }
 
 inline SK_NODE* SK_WeaverCloseWellFormedMemLayout(SK_COMPUNIT* cu, SK_NDWEAVER* wv) {
@@ -758,6 +784,10 @@ inline u4 SK_WeaverTrySymWeaving(SK_COMPUNIT* cu, SK_NDWEAVER* wv) {
 				retv = sk_ndtp_solo;
 			}
 		}
+		else {
+			// TODO:: this is a dumb hack to align things, solve this problem properly
+			SK_WeaverNxtNode(cu, wv);
+		}
 		SK_WeaverPushPeek(wv, 2);
 		SK_WeaverDrop(wv, 2);
 		return retv;
@@ -773,6 +803,7 @@ inline u4 SK_WeaverTrySymWeaving(SK_COMPUNIT* cu, SK_NDWEAVER* wv) {
 	return sk_ndtp_solo;
 }
 
+// TODO:: add more recover paths
 void SK_WeaverErrorRecovery(SK_COMPUNIT* cu, SK_NDWEAVER* wv, u4 contxt, u4 failedweb) {
 	switch (contxt) {
 		case sk_ndtp_sym: {
@@ -787,7 +818,6 @@ void SK_WeaverErrorRecovery(SK_COMPUNIT* cu, SK_NDWEAVER* wv, u4 contxt, u4 fail
 						FatalError(0, "SK_WeaverErrorRecovery: sym 1\n");
 					} break;
 					case sk_ndtp_smlay: {
-						// FatalError(0, "SK_WeaverErrorRecovery: sym 2\n");
 						if (failedweb == sk_ndtp_solo) {
 							SK_ErrorAtNode(cu, symnd, 0);
 							SK_WeaverDrop(wv, 1);
@@ -816,6 +846,7 @@ void SK_WeaverErrorRecovery(SK_COMPUNIT* cu, SK_NDWEAVER* wv, u4 contxt, u4 fail
 				SK_WeaverNxtNode(cu, wv);
 				SK_NODE* nxtnd = (SK_NODE*)DB_Peek(wv->syntaxstk, 1);
 				SK_NODE* symnd = (SK_NODE*)DB_Peek(wv->syntaxstk, 2);
+
 				if (nxtnd->type == sk_ndtp_delim && (nxtnd->val == sk_kw_lpar || nxtnd->val == sk_kw_lsqr)) {
 					SK_STR* symstr = (SK_STR*)DB_Index(cu->strs->pool, symnd->symoff);
 					SK_ErrorAtNode(cu, symnd, "missing { : } after symbol { %$ }", symstr->str, (u8)symstr->len);
@@ -851,7 +882,6 @@ void SK_WeaverErrorRecovery(SK_COMPUNIT* cu, SK_NDWEAVER* wv, u4 contxt, u4 fail
 		} break;
 	}
 }
-
 
 // TODO:: take advange from the new design, an emmit things the momment you know you can do it
 // instead of following the old path this implies a rewrite but it would be nicer
@@ -918,20 +948,20 @@ void SK_WeaverWeaveProgram(SK_COMPUNIT* cu, const u2 debugmode) {
 						}
 						// TODO:: for now we only admit primitive types as memlaymems, add recursive memlayouts and proper proctypes
 						if (prvnd && prvnd->type == sk_ndtp_memoff) {
-							// TODO:: here we should also divide this into many nodes instead for constructs like
-							// struct.field.subfield0.subfield1.subfield2. ... but for now let's just restrict it to 1 offset
-							// until i create proper mememory layouts types and proc types
 							DB_Push(wv->wweb, symnd);
 							SK_WeaverDrop(wv, 2); // the symbol the memoff
 							goto nxtnd;
 						}
 					} break;
 					case sk_ndtp_memoff: {
+						// TODO:: add suport for chains of the form sym.sym.sym. ... .sym
 						if (!prvnd || (prvnd && prvnd->type == sk_ndtp_ops)) {
 							DB_Push(wv->usymstk, &(SK_WEAVERSTKSTT){ .usym.procidx = wv->ndgroup.procidx, .usym.procoff = DB_ElementCount(wv->wweb) });
 							symnd->type = sk_ndtp_memoff;
 							DB_Push(wv->wweb, symnd);
 							SK_WeaverDropPeek(wv, 1);
+							wv->scope.symc++;
+							wv->ndgroup.len++;
 							goto nxtnd;
 						}
 					} break;
@@ -951,9 +981,9 @@ void SK_WeaverWeaveProgram(SK_COMPUNIT* cu, const u2 debugmode) {
 						}
 					} break;
 					case sk_ndtp_mlaymem: {
-						// TODO:: add the case when there's a mlaymem at the top, it must only a size descriptor for now. see the TODO below 
+						// TODO:: add the case when there's a mlaymem is at the top, it must only a size descriptor for now. see the TODO below 
 						if (prvnd && (prvnd->type == sk_ndtp_dmlay || prvnd->type == sk_ndtp_smlay)) {
-							// TODO:: do some error handling here that is for now a field can't have 2 names later nth names for the same field could be seen as unions
+							// TODO:: do some error handling here that is for now a field can't have 2 names later multiple names for the same field could be seen as unions
 							wv->ndgroup.len++;
 							SK_WeaverRegisterMemLayField(cu, wv, prvnd, symnd);
 							u4 symoff = symnd->symoff;
@@ -1128,6 +1158,7 @@ void SK_WeaverWeaveProgram(SK_COMPUNIT* cu, const u2 debugmode) {
 								SK_WeaverOpenNodeGroup(cu, wv, sk_ndtp_smlay, 0);
 								SK_NODE* memlaynd = (SK_NODE*)DB_Index(wv->wweb, wv->ndgroup.off);
 								memlaynd->mlaysym = symoff;
+								prvnode->mlaysym = symoff;
 							}
 							else {
 								SK_ErrorAtNode(cu, delimnd, 0);
@@ -1595,7 +1626,6 @@ void SK_WeaverWeaveProgram(SK_COMPUNIT* cu, const u2 debugmode) {
 							}
 							SK_ErrorAtNode(cu, ndsym, "the symbol { %$ } was used in the procedure { %$ } with out declaring it first", ndnamestr->str, (u8)ndnamestr->len, procnamestr->str, (u8)procnamestr->len);
 						}
-						Print("think about gardening instead\n");
 					}
 				}
 				if (debugmode & sk_dbmd_weaver) {

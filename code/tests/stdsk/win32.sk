@@ -29,3 +29,12 @@ WriteFile:(ptr ptr u4 ptr ptr:s4) extrn("kernel32.dll" "WriteFile")
 GetStdHandle:(s4:ptr) extrn("kernel32.dll" "GetStdHandle")
 
 GetLastError:(:u4) extrn("Kernel32.dll" "GetLastError")
+
+; Mem
+GetProcessHeap:(:ptr) extrn("kernel32.dll" "GetProcessHeap")
+; heap flags size : ptr
+HeapAlloc:(ptr s4 u8: ptr) extrn("kernel32.dll" "HeapAlloc")
+; heap flags(0) HeapAlloc ptr : success bool
+HeapFree:(ptr s4 ptr: u4) extrn("kernel32.dll" "HeapFree")
+; millisecs
+Sleep:(u4:) extrn("kernel32.dll" "Sleep")

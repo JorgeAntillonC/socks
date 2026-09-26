@@ -27,8 +27,7 @@ u1 SK_TableStrCmp(PHASHTABLE* table, PHTENTRY* entry, u1* key, u4 keysize) {
 
 u1 SK_TableSymbolCmp(PHASHTABLE* table, PHTENTRY* entry, u1* key, u4 keysize) {
 	SK_SYMBOL* sksym = (SK_SYMBOL*)DB_Index(table->pool, entry->off);
-	u8 symkey = ((u8)sksym->scopeid << 32) | sksym->stroff;
-	return symkey == *(u8*)key;
+	return sksym->key == *(u8*)key;
 }
 
 SK_COMPUNIT* SK_CompUnitCreate(u1* sourcefile, u1* entrypoint) {

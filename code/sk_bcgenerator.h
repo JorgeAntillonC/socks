@@ -142,6 +142,23 @@ SK_NODE* SK_GenOpsByteCode(SK_COMPUNIT* cu, SK_NODE* node, DYNBUFF* icr, DYNBUFF
 						op = SK_GenOpsByteCode(cu, op, icr, unresolvedsymbols, reservedstackspace, errbuff, debugmode)-1;
 					} break;
 					case sk_ndtp_type: { } break; // droping the casts
+					case sk_ndtp_nop: { k -= 1; } break;
+					case sk_ndtp_memoff: {
+						SK_SYMBOL* symte = (SK_SYMBOL*)DB_Index(cu->syms->pool, op->symoff);
+						DYNBUFF* ndwebmaly = *(DYNBUFF**)DB_Index(cu->ndwebs, symte->objid);
+						SK_NODE* mlaynd = (SK_NODE*)DB_Index(ndwebmaly, 1);
+
+						switch (mlaynd->type) {
+							case sk_ndtp_dmlay: {
+								DB_Push(icr, &(u8){ skvm_op_idx });
+								SK_TagSym(symte, icr, unresolvedsymbols, op->symoff);
+							} break;
+							case sk_ndtp_smlay: {
+								DB_Push(icr, &(u8){ skvm_op_lea });
+								SK_TagSym(symte, icr, unresolvedsymbols, op->symoff);
+							} break;
+						}
+					} break;
 					default: {
 						SK_NodePrintInfo(cu, op);
 						FatalError(0, "SK_GenBytecode:: \"%s\" not immplented (inner)\n", sk_ndtp2str[op->type]);
@@ -183,6 +200,10 @@ SK_NODE* SK_GenOpsByteCode(SK_COMPUNIT* cu, SK_NODE* node, DYNBUFF* icr, DYNBUFF
 			u8 totalmemrequired = 0;
 
 			for (u4 i = 0; i < ndmlay->mlaymemc; i++) {
+				if (ndmemdesc->mlayf & 0b010) {
+					SK_SYMBOL* mlaymemsym = (SK_SYMBOL*)DB_Index(cu->syms->pool, ndmemdesc->mlaymemsym);
+					SK_PatchUnresolvedSym(cu, icr, mlaymemsym, *reservedstackspace + totalmemrequired);
+				}
 				totalmemrequired += ndmemdesc->mlaymemsize * ndmemtype->primsize;
 				ndmemdesc += 2;
 				ndmemtype += 2;
@@ -331,13 +352,11 @@ void SK_BCGeneratorGenerateBytecode(SKVM_PROG* program, SK_COMPUNIT* cu, const u
 					SK_NODE* memdesc = nd;
 					SK_NODE* memtype = nd + 1;
 
-					if (memdesc->mlaymemf & 0b010) { //TODO:: if the memember has a symbol so stuff
-						SK_SYMBOL* memsymte = (SK_SYMBOL*)DB_Index(cu->syms->pool, memdesc->mlaymemsym);
-						FatalError(0, "memlayouts with named members are not implemented yet");
+					if (memdesc->mlaymemf & 0b010) {
+						SK_SYMBOL* mlaymemsym = (SK_SYMBOL*)DB_Index(cu->syms->pool, memdesc->mlaymemsym);
+						SK_PatchUnresolvedSym(cu, icr, mlaymemsym, maxsize + memlayaddr);
 					}
-					else {
-						maxsize += memdesc->mlaymemsize * memtype->primsize;
-					}
+					maxsize += memdesc->mlaymemsize * memtype->primsize;
 					nd += 2;
 				}
 				u8 oldocc = icr->occ;
@@ -370,6 +389,43 @@ void SK_BCGeneratorGenerateBytecode(SKVM_PROG* program, SK_COMPUNIT* cu, const u
 			} break;
 			case sk_symtp_dmlay: {} break;
 			case sk_symtp_undef: {} break;
+			case sk_symtp_mlaymem: {
+				SK_NODE* node = (SK_NODE*)DB_Index(*(DYNBUFF**)DB_Index(cu->ndwebs, wsym->objid), 1);
+				SK_SYMBOL* mlaymemsym = (SK_SYMBOL*)DB_Index(cu->syms->pool, node->mlaysym);
+				if (node->type == sk_ndtp_smlay && (mlaymemsym->state == sk_symstt_seen || mlaymemsym->state == sk_symstt_unpatched)) {
+					mlaymemsym->state = sk_symstt_patched;
+					SKVM_SYM vmsym = { 0 };
+					vmsym.bc = (u1*)(u8)icr->occ;
+					vmsym.off = wsymstr->str;
+					vmsym.len = wsymstr->len;
+					vmsym.type = skvm_symtp_smlay;
+					u8 maxsize = 0;
+					u8 memlayaddr = DB_ElementCount(icr);
+					SK_NODE* nd = node + 1;
+
+					// need to register the symbol
+					for (u8 i = 0; i < node->mlaymemc << 1; i += 2) {
+						SK_NODE* memdesc = nd;
+						SK_NODE* memtype = nd + 1;
+
+						if (memdesc->mlaymemf & 0b010) {
+							SK_SYMBOL* mlaymemsym = (SK_SYMBOL*)DB_Index(cu->syms->pool, memdesc->mlaymemsym);
+							SK_PatchUnresolvedSym(cu, icr, mlaymemsym, maxsize + memlayaddr);
+						}
+						maxsize += memdesc->mlaymemsize * memtype->primsize;
+						nd += 2;
+					}
+					u8 oldocc = icr->occ;
+					u8 newocc = ((icr->occ + maxsize + (u8)7) & (~(u8)7));
+					while (newocc > icr->cap) { DB_Grow(icr); }
+					icr->occ = newocc;
+					memset(icr->data + oldocc, 0, newocc - oldocc);
+
+					vmsym.bcend = (u1*)(u8)icr->occ;
+					DB_Push(program->symbols, &vmsym);
+					SK_PatchUnresolvedSym(cu, icr, wsym, memlayaddr);
+				}
+			} break;
 			default: {
 				FatalError(0, "unhandled symbol type %s at code gen", sk_symtp2str[wsym->type]);
 			}

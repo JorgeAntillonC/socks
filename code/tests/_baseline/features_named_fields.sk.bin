@@ -1,0 +1,12 @@
+RC=69
+---STDOUT---
+start:
+
+compiling: features\named_fields.sk
+69420
+420
+69420
+69
+the program has halted!!!
+
+---STDERR---

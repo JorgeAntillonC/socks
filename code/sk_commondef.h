@@ -71,6 +71,7 @@ SK_TYPEDESC sk_tpdesc[sk_tp_count] = { SK_TYPES };
 
 #define SK_NODETYPES \
 X(eof)\
+X(nop)\
 X(num)\
 X(sym)\
 X(str)\
@@ -105,7 +106,7 @@ u1* sk_ndtp2str[sk_ndtp_count] = { SK_NODETYPES };
 #undef X
 
 // TODO:: group better the sub parameters, i am basically writting the type as a prefix anyway
-// may as well do it with named unions/structs to keep things in a neater order and remember what goes where
+// may as well do it with named unions/structs to keep things in a neater order and instead of remembering what goes where
 typedef struct SK_NODE SK_NODE;
 struct SK_NODE {
 	u2 col;
@@ -161,6 +162,7 @@ struct SK_NODE {
 				u4 primoff; // for funcs and memlay
 				u4 mlaymemc;   // for mem layout
 				u4 mlaymemsize; // for mem layout arrays
+				u4 memoffc; // the amount of chained field refs sym.sym.sym.sym.sym.sym.
 				u4 retsc;
 				u4 cmdtp;
 				u4 symcall;
@@ -204,14 +206,27 @@ typedef struct SK_SYMBOL SK_SYMBOL;
 struct SK_SYMBOL {
 	u2 type;   // proc mem etc
 	u2 state;
-	u4 sourcef;
-	u4 scopeid;
-	u4 stroff;
-	union {
-		u4 objid;  // proc index, mem index, etc index nodepool
-		u4 mlaymemoff;  // proc index, mem index, etc index nodepool
-	};
+	u4 padd0;
+
+	u4 mlaymemoff;
+	u4 objid;  // proc index, mem index, etc index nodepool
+	
 	u8 icr;    // proc index, mem index, etc index "final icr addr"
+
+	union{
+		struct {
+			u4 stroff;
+			union {
+				u4 memlay;
+				u4 scopeid;
+			};
+		};
+		struct {
+			u4 hkey;
+			u4 lkey;
+		};
+		u8 key;
+	};
 };
 
 typedef struct SK_STR SK_STR;
